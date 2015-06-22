@@ -1,0 +1,170 @@
+body, html { 
+    overflow-x: hidden; 
+    overflow-y: auto;
+}
+.handwritten {
+	font-family: 'Marck Script', cursive;
+}
+.main-content-font {
+	font-size: 30px;
+	color: white;
+}
+
+#sky {
+	width: 100%;
+	height: 100%;
+
+	animation-name: sky;
+	animation-duration: 6s;
+	animation-timing-function: ease;
+	animation-iteration-count: 1;	
+	animation-direction: normal;
+	animation-delay: 0;
+	animation-play-state: running;
+	animation-fill-mode: forwards;
+}
+
+@keyframes sky {
+
+	0% {
+		background-color: #525252;
+	}
+	
+	100% {
+		background-color: #6293e5;
+	}
+}
+
+#sun {
+	height: 0;
+	width: 20%;
+	padding-bottom: 20%;
+	border-radius: 300px;
+
+	position: absolute;
+	right: 2%;
+
+	animation-name: sunrise;
+	animation-duration: 6s;
+	animation-timing-function: ease;
+	animation-iteration-count: 1;	
+	animation-direction: normal;
+	animation-delay: 0;
+	animation-play-state: running;
+	animation-fill-mode: forwards;
+}
+
+@keyframes sunrise {
+
+	0% {
+		top: 80%;
+		background: #f00;
+	}
+	
+	100% {
+		top: 2%;
+		background: #ffd630;
+	}
+}
+
+#ground {
+	
+	width: 100%;
+	height: 25%;
+	position: absolute;
+	bottom: 0%;
+
+	animation-name: ground;
+	animation-duration: 6s;
+	animation-timing-function: ease;
+	animation-iteration-count: 1;	
+	animation-direction: normal;
+	animation-delay: 0;
+	animation-play-state: running;
+	animation-fill-mode: forwards;
+}
+
+@keyframes ground {
+
+	0% {
+		background: #6c5228;
+	}
+
+	100% {
+		background: #48a037;
+	}
+}
+
+#cloud {
+	position: absolute;
+
+	animation-name: cloud;
+	animation-duration: 8s;
+	animation-timing-function: ease;
+	animation-iteration-count: 1;	
+	animation-direction: normal;
+	animation-delay: 0;
+	animation-play-state: running;
+	animation-fill-mode: forwards;
+}
+
+#cloud-1 {
+	position: relative;
+	top: 60px;
+	left: -40px;
+
+	border-radius: 90px / 30px;
+        width: 160px;
+        height: 50px;
+        background: #fff;
+}
+#cloud-2 {
+	position: relative;
+	top: 0;
+	left: 0;
+
+	border-radius: 90px / 30px;
+        width: 160px;
+        height: 50px;
+        background: #fff;
+}
+#cloud-3 {
+	position: relative;
+	top: -30px;
+	left: 60px;
+
+	border-radius: 90px / 30px;
+        width: 160px;
+        height: 50px;
+        background: #fff;
+}
+
+@keyframes cloud {
+
+	0% {
+		opacity: 0;
+		left: 0;
+	}
+	
+	50% {
+		opacity: 0;
+		left: 0;
+	}
+
+	100% {
+		opacity: 1;
+		left: 25%;
+	}
+}
+
+#hut {
+	background-image: url(img/hut.png);
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+	height: 30%;
+	width: 100%;
+
+	position: absolute;
+	bottom: 25%;
+	left: 5%;
+}
