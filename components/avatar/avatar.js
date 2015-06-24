@@ -17,20 +17,24 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 
 	    this.parentContainer = document.getElementById('sky');
 	    this.domContainer = document.createElement('canvas');
+	    this.domContainer.id = 'avatar-container';
 	    this.parentContainer.appendChild(this.domContainer);
 
 	    Ajax.get('components/avatar/json/tyler.json', function(data){
-		console.log(data);
 		this.data = JSON.parse(data);
-		this.spritesheet = new createjs.SpriteSheet(data);
+		this.spritesheet = new createjs.SpriteSheet(this.data);
+
+		this.domContainer.height = this.data.frames.height;
+		this.domContainer.width = this.data.frames.width;
+
 		this.animation = new createjs.Sprite(this.spritesheet, "idle");
 		this.stage = new createjs.Stage(this.domContainer);
 
 		this.stage.addChild(this.animation);
 
-		createjs.Ticker.timingMode = create.Ticker.RAF;
+		createjs.Ticker.timingMode = createjs.Ticker.RAF;
 		createjs.Ticker.addEventListener("tick", this.stage);
-	    }).bind(this);
+	    }.bind(this));
 
 //		this.data = JSON.parse(Tyler);
 //		console.log(this.data);

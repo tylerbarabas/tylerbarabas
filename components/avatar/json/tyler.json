@@ -7,13 +7,14 @@
 	        },
 		"idle": {
 		    "next": true,
+		    "speed": 0.2,
 		    "frames": [0,1,2,3,4,5]
 		},
 	        "walk": {
 	            "next": true,
 	            "speed": 0.2,
-	            "frames": [6,7,8,9,10,11,12]
+	            "frames": [6,7,8,9]
         	}
 	},
-	"images": ["../img/tyler.png"]
+	"images": ["components/avatar/img/tyler.png"]
 }
