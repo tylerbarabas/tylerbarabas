@@ -1,4 +1,4 @@
-require(['components/environment.js'],function(Environment){
+require(['components/environment/environment.js'],function(Environment){
 
     var env = new Environment;
     setTimeout(function(){
