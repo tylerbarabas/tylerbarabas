@@ -258,7 +258,7 @@ body, html {
 }
 
 #hut {
-	background-image: url(img/hut.png);
+	background-image: url(../img/hut.png);
 	background-size: auto 100%;
 	background-repeat: no-repeat;
 	height: 30%;
