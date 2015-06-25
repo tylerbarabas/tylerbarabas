@@ -14,6 +14,26 @@ body {
     height: 100%;
 }
 
+#stars {
+	width: 100%;
+	height: 100%;
+	background-image: url(../img/stars.gif);
+}
+
+#stars.day {
+
+	-webkit-transition: opacity 5s; /* Safari */
+    transition: opacity 5s;
+	opacity: 0;
+}
+
+#stars.night {
+
+	-webkit-transition: opacity 20s; /* Safari */
+    transition: opacity 20s;
+	opacity: .8;
+}
+
 #sky.day {
 	animation-name: sky_day;
 	animation-duration: 6s;
@@ -55,6 +75,79 @@ body {
     100% {
         background-color: #525252;
     }
+}
+
+#moon {
+	position: absolute;
+	top: 0;
+	left: -100px;
+
+	width: 100px;
+	height: 100px;
+	border-radius: 50px;
+
+  border-radius: 50%;
+  box-shadow: 25px 25px 0 0 #fff;
+}
+
+#moon.day {
+	animation-name: moon_day;
+	animation-duration: 10s;
+	animation-timing-function: ease;
+	animation-iteration-count: 1;
+	animation-direction: normal;
+	animation-delay: 0;
+	animation-play-state: running;
+	animation-fill-mode: forwards;
+}
+
+#moon.night {
+	animation-name: moon_night;
+	animation-duration: 10s;
+	animation-timing-function: ease;
+	animation-iteration-count: 1;
+	animation-direction: normal;
+	animation-delay: 0;
+	animation-play-state: running;
+	animation-fill-mode: forwards;
+}
+
+@keyframes moon_day {
+
+	0% {
+		opacity: 1;
+		left: 50px;
+	}
+
+	50% {
+		opacity: 0;
+		left: -100px;
+	}
+	
+	100% {
+		opacity: 0;
+		left: -100px;
+	}
+
+}
+
+@keyframes moon_night {
+
+	0% {
+		opacity: 0;
+		left: -100px;
+	}
+
+	50% {
+		opacity: 0;
+		left: -100px;
+	}
+	
+	100% {
+		opacity: 1;
+		left: 50px;
+	}
+
 }
 
 #sun {
@@ -168,6 +261,7 @@ body {
 
 #cloud {
     position: absolute;
+    top: 3%;
 }
 
 #cloud.day {
