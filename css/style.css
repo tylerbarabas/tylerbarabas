@@ -208,11 +208,16 @@ body {
     }
 }
 
+#written-msg {
+	margin-top: 20px;
+}
+
 #ground {
     width: 100%;
     height: 25%;
     position: absolute;
     bottom: 0%;
+	text-align: center;
 }
 
 #ground.day {
