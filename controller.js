@@ -17,15 +17,15 @@ function(Environment,Avatar){
         
         this.environment.changeState(this.environmentState);
         
-        setInterval(function(){
-        	if (this.environmentState == 'day')
-        		newState = 'night';
-        	else
-        		newState = 'day';
-        
-            this.environment.changeState(newState);
-            this.environmentState = newState;
-        }.bind(this),20000);
+        //setInterval(function(){
+        //	if (this.environmentState == 'day')
+        //		newState = 'night';
+        //	else
+        //		newState = 'day';
+        //
+        //    this.environment.changeState(newState);
+        //    this.environmentState = newState;
+        //}.bind(this),20000);
 
         this.avatar = new Avatar;
         this.avatar.init();
