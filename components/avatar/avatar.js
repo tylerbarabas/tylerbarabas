@@ -85,6 +85,10 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 
 		doAction: function (action) {
 			if (this.walking && action != 'idle') return;
+			if (action == 'jump' && this.currentAction == 'fall'){
+				this.currentAction = 'idle';
+				return;
+			}
 			var newPosition = {
 				top: this.currentPosition.top,
 				left: this.currentPosition.left
@@ -140,7 +144,7 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 				this.domContainer.style.left = this.currentPosition.left + '%';
 			}.bind(this));
 
-			this.tween.to(toPos, time).call(this.moveComplete, [], this);
+			this.tween.to(toPos, time, createjs.Ease.linear).call(this.moveComplete, [], this);
 		},
 
 		moveComplete: function(){
