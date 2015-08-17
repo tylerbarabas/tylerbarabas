@@ -371,8 +371,6 @@ body {
 }
 #avatar-container {
 	position: absolute;
-	bottom: 23%;
-	left: 50%;
 	
 	height: 100px;
 }
