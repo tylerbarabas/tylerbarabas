@@ -10,7 +10,7 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 		this.domContainer = null;
 		this.parentContainer = null;
 		this.currentPosition = null;
-		this.currentDirection = null;
+		this.currentAction = null;
 		this.walking = null;
 		this.moving = null;
 
@@ -49,21 +49,22 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 				document.addEventListener('keydown', function(event) {
 					switch(event.which) {
 						case 37:
-							this.walk('left');
+							this.doAction('walk-left');
+							break;
+						case 38:
+							this.doAction('jump');
 							break;
 						case 39:
-							this.walk('right');
+							this.doAction('walk-right');
 							break;
 					}
 				}.bind(this), false);
 
 				document.addEventListener('keyup', function(event) {
-					console.log('keyup!');
 					switch(event.which) {
 						case 37:
 						case 39:
-							console.log('here here');
-							this.walk('idle');
+							this.doAction('idle');
 							break;
 					}
 				}.bind(this), false);
@@ -82,46 +83,54 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 			this.stage.addChild(this.animation);
 		},
 
-		walk: function (direction) {
-			if (this.walking && direction != 'idle') return;
+		doAction: function (action) {
+			if (this.walking && action != 'idle') return;
 			var newPosition = {
 				top: this.currentPosition.top,
 				left: this.currentPosition.left
 			};
 
-			this.currentDirection = direction;
+			this.currentAction = action;
 
-			switch(direction) {
-				case 'right':
+			switch(action) {
+				case 'walk-right':
 					this.walking = true;
 					this.domContainer.style.transform = "rotateY(0deg)";
 					this.changeSprite('walk');
 					
 					newPosition.left += 1;
-					this.moveTo(newPosition);
+					this.moveTo(newPosition,60);
 					break;
 				
-				case 'left':
+				case 'walk-left':
 					this.walking = true;
 					this.domContainer.style.transform = "rotateY(180deg)";
 					this.changeSprite('walk');
 
 					newPosition.left -= 1;
-					this.moveTo(newPosition);
+					this.moveTo(newPosition,60);
+					break;
+
+				case 'jump':
+					newPosition.top -= 20;
+					this.moveTo(newPosition,300);
+					break;
+
+				case 'fall':
+					newPosition.top += 20;
+					this.moveTo(newPosition,300);
 					break;
 
 				case 'idle':
 				default:
-				console.log('GOT HERE');
 					this.walking = false;
 					this.domContainer.style.transform = "rotateY(0deg)";
 					this.changeSprite('idle');
 					break;
-			
 			}
 		},
 
-		moveTo: function(toPos) {
+		moveTo: function(toPos,time) {
 			if (this.moving) return;
 
 			this.moving = true;
@@ -131,14 +140,16 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 				this.domContainer.style.left = this.currentPosition.left + '%';
 			}.bind(this));
 
-			this.tween.to(toPos, 60).call(this.moveComplete, [], this);
+			this.tween.to(toPos, time).call(this.moveComplete, [], this);
 		},
 
 		moveComplete: function(){
 			this.moving = false;
-			if (this.walking) {
+			if (this.currentAction.indexOf('walk') != -1 && this.walking) {
 				this.walking = false;
-				this.walk(this.currentDirection);
+				this.doAction(this.currentAction);
+			} else if (this.currentAction == 'jump') {
+				this.doAction('fall');
 			}
 		}
     };
