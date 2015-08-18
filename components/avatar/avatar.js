@@ -67,21 +67,26 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 
 		doAction: function (action) {
 			if ((this.walking || this.jumping || this.falling) && action != 'idle') return;
-			var newPosition = {
-				top: this.currentPosition.top,
-				left: this.currentPosition.left
-			};
-
 			this.currentAction = action;
 
+			var newPosition;
 			switch(action) {
 				case 'walk-right':
 					this.walking = true;
 					this.domContainer.style.transform = "rotateY(0deg)";
 					this.changeSprite('walk');
-					
+
+					if (this.currentPosition.left > 101) {
+						this.currentPosition.left = -8;
+						this.domContainer.style.left = this.currentPosition.left;
+					}
+					newPosition = {
+						top: this.currentPosition.top,
+						left: this.currentPosition.left
+					};
 					newPosition.left += 1;
 					this.moveTo(newPosition,60);
+
 					break;
 				
 				case 'walk-left':
@@ -89,18 +94,35 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 					this.domContainer.style.transform = "rotateY(180deg)";
 					this.changeSprite('walk');
 
+					if (this.currentPosition.left < -8) {
+						this.currentPosition.left = 101;
+						this.domContainer.style.left = this.currentPosition.left;
+					}
+					newPosition = {
+						top: this.currentPosition.top,
+						left: this.currentPosition.left
+					};
 					newPosition.left -= 1;
 					this.moveTo(newPosition,60);
+
 					break;
 
 				case 'jump':
 					this.jumping = true;
+					newPosition = {
+						top: this.currentPosition.top,
+						left: this.currentPosition.left
+					};
 					newPosition.top = 45;
 					this.moveTo(newPosition,300);
 					break;
 
 				case 'fall':
 					this.falling = true;
+					newPosition = {
+						top: this.currentPosition.top,
+						left: this.currentPosition.left
+					};
 					newPosition.top = 65;
 					this.moveTo(newPosition,300);
 					break;
