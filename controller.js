@@ -18,6 +18,7 @@ function(Environment,Avatar){
 
         document.addEventListener('keydown', this.onKeyDown.bind(this), false);
         document.addEventListener('keyup', this.onKeyUp.bind(this), false);
+        document.addEventListener('click',this.onClick.bind(this), false);
     };
 
     Controller.prototype.onKeyDown = function (event) {
@@ -58,6 +59,14 @@ function(Environment,Avatar){
                     break;
             }
         }
+    };
+
+    Controller.prototype.onClick = function(event) {
+        var newPosition = {
+            bottom: 150,
+            left: event.x-50
+        };
+        this.avatar.doAction('walk-to',newPosition);
     };
     
     var controller = new Controller;

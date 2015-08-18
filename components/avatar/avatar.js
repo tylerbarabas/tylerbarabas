@@ -36,12 +36,12 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 
 				this.domContainer.height = this.data.frames.height;
 				this.domContainer.width = this.data.frames.width;
-				this.domContainer.style.top = '65%';
-				this.domContainer.style.left = '50%';
+				this.domContainer.style.bottom = '150px';
+				this.domContainer.style.left = window.innerHeight/2+'px';
 
 				this.currentPosition = {
-					top: 65,
-					left: 50
+					bottom: 150,
+					left: parseInt(this.domContainer.style.left.split('p')[0])
 				};
 
 				this.changeSprite('idle');
@@ -66,26 +66,27 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 			this.stage.addChild(this.animation);
 		},
 
-		doAction: function (action) {
+		doAction: function (action,newPosition) {
 			if ((this.walking || this.jumping || this.falling) && action != 'idle') return;
 			this.currentAction = action;
 
-			var newPosition;
+			if (typeof newPosition == 'undefined') newPosition = null;
+
 			switch(action) {
 				case 'walk-right':
 					this.walking = true;
 					this.domContainer.style.transform = "rotateY(0deg)";
 					this.changeSprite('walk');
 
-					if (this.currentPosition.left > 101) {
-						this.currentPosition.left = -8;
+					if (this.currentPosition.left > window.innerWidth+10) {
+						this.currentPosition.left = -50;
 						this.domContainer.style.left = this.currentPosition.left;
 					}
 					newPosition = {
-						top: this.currentPosition.top,
+						bottom: this.currentPosition.bottom,
 						left: this.currentPosition.left
 					};
-					newPosition.left += 1;
+					newPosition.left += 10;
 					this.moveTo(newPosition,60);
 
 					break;
@@ -95,15 +96,15 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 					this.domContainer.style.transform = "rotateY(180deg)";
 					this.changeSprite('walk');
 
-					if (this.currentPosition.left < -8) {
-						this.currentPosition.left = 101;
+					if (this.currentPosition.left < -50) {
+						this.currentPosition.left = window.innerWidth + 10;
 						this.domContainer.style.left = this.currentPosition.left;
 					}
 					newPosition = {
-						top: this.currentPosition.top,
+						bottom: this.currentPosition.bottom,
 						left: this.currentPosition.left
 					};
-					newPosition.left -= 1;
+					newPosition.left -= 10;
 					this.moveTo(newPosition,60);
 
 					break;
@@ -111,21 +112,37 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 				case 'jump':
 					this.jumping = true;
 					newPosition = {
-						top: this.currentPosition.top,
+						bottom: this.currentPosition.bottom,
 						left: this.currentPosition.left
 					};
-					newPosition.top = 45;
+					newPosition.bottom = 350;
 					this.moveTo(newPosition,300);
 					break;
 
 				case 'fall':
 					this.falling = true;
 					newPosition = {
-						top: this.currentPosition.top,
+						bottom: this.currentPosition.bottom,
 						left: this.currentPosition.left
 					};
-					newPosition.top = 65;
+					newPosition.bottom = 150;
 					this.moveTo(newPosition,300);
+					break;
+
+				case 'walk-to':
+					this.walking = true;
+					if (this.currentPosition.left > newPosition.left) {
+						this.domContainer.style.transform = "rotateY(180deg)";
+					} else {
+						this.domContainer.style.transform = "rotateY(0deg)";
+					}
+					var ratePerSec = 250;
+					var distance = this.currentPosition.left - newPosition.left;
+					distance = (distance<0)?distance*-1:distance;
+					var time = distance/(ratePerSec/1000);
+
+					this.changeSprite('walk');
+					this.moveTo(newPosition,time);
 					break;
 
 				case 'idle':
@@ -143,8 +160,8 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 			this.moving = true;
 			this.tween = createjs.Tween.get(this.currentPosition);
 			this.tween.addEventListener('change', function () {
-				this.domContainer.style.top = this.currentPosition.top + '%';
-				this.domContainer.style.left = this.currentPosition.left + '%';
+				this.domContainer.style.bottom = this.currentPosition.bottom + 'px';
+				this.domContainer.style.left = this.currentPosition.left + 'px';
 			}.bind(this));
 
 			this.tween.to(toPos, time).call(this.moveComplete, [], this);
@@ -152,9 +169,12 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 
 		moveComplete: function(){
 			this.moving = false;
-			if (this.currentAction.indexOf('walk') != -1 && this.walking) {
+			if ((this.currentAction == 'walk-right' || this.currentAction == 'walk-left') && this.walking) {
 				this.walking = false;
 				this.doAction(this.currentAction);
+			} else if (this.currentAction == 'walk-to') {
+				this.walking = false;
+				this.doAction('idle');
 			} else if (this.currentAction == 'jump') {
 				this.jumping = false;
 				this.doAction('fall');
