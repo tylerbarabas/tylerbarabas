@@ -51,32 +51,8 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 				createjs.Ticker.timingMode = createjs.Ticker.RAF;
 				createjs.Ticker.addEventListener("tick", this.stage);
 
-				document.addEventListener('keydown', function(event) {
-					if (this.keysDown.indexOf(event.which) != -1) return;
-					this.keysDown.push(event.which);
-					switch(event.which) {
-						case 37:
-							this.doAction('walk-left');
-							break;
-						case 38:
-							this.doAction('jump');
-							break;
-						case 39:
-							this.doAction('walk-right');
-							break;
-					}
-				}.bind(this), false);
-
-				document.addEventListener('keyup', function(event) {
-					var index = this.keysDown.indexOf(event.which);
-					this.keysDown.splice(index, 1);
-					switch(event.which) {
-						case 37:
-						case 39:
-							this.doAction('idle');
-							break;
-					}
-				}.bind(this), false);
+				document.addEventListener('keydown', this.onKeyDown.bind(this), false);
+				document.addEventListener('keyup', this.onKeyUp.bind(this), false);
 			}.bind(this));
 		},
 
