@@ -11,8 +11,11 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 		this.parentContainer = null;
 		this.currentPosition = null;
 		this.currentAction = null;
-		this.walking = null;
-		this.moving = null;
+		this.walking = false;
+		this.jumping = false;
+		this.falling = false;
+		this.moving = false;
+		this.keysDown = [];
 
     }
 
@@ -42,11 +45,15 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 
 				this.changeSprite('idle');
 				this.walking = false;
+				this.jumping = false;
+				this.falling = false;
 
 				createjs.Ticker.timingMode = createjs.Ticker.RAF;
 				createjs.Ticker.addEventListener("tick", this.stage);
 
 				document.addEventListener('keydown', function(event) {
+					if (this.keysDown.indexOf(event.which) != -1) return;
+					this.keysDown.push(event.which);
 					switch(event.which) {
 						case 37:
 							this.doAction('walk-left');
@@ -61,6 +68,8 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 				}.bind(this), false);
 
 				document.addEventListener('keyup', function(event) {
+					var index = this.keysDown.indexOf(event.which);
+					this.keysDown.splice(index, 1);
 					switch(event.which) {
 						case 37:
 						case 39:
@@ -84,11 +93,7 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 		},
 
 		doAction: function (action) {
-			if (this.walking && action != 'idle') return;
-			if (action == 'jump' && this.currentAction == 'fall'){
-				this.currentAction = 'idle';
-				return;
-			}
+			if ((this.walking || this.jumping || this.falling) && action != 'idle') return;
 			var newPosition = {
 				top: this.currentPosition.top,
 				left: this.currentPosition.left
@@ -116,12 +121,14 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 					break;
 
 				case 'jump':
-					newPosition.top -= 20;
+					this.jumping = true;
+					newPosition.top = 45;
 					this.moveTo(newPosition,300);
 					break;
 
 				case 'fall':
-					newPosition.top += 20;
+					this.falling = true;
+					newPosition.top = 65;
 					this.moveTo(newPosition,300);
 					break;
 
@@ -144,7 +151,7 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 				this.domContainer.style.left = this.currentPosition.left + '%';
 			}.bind(this));
 
-			this.tween.to(toPos, time, createjs.Ease.linear).call(this.moveComplete, [], this);
+			this.tween.to(toPos, time).call(this.moveComplete, [], this);
 		},
 
 		moveComplete: function(){
@@ -153,7 +160,11 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 				this.walking = false;
 				this.doAction(this.currentAction);
 			} else if (this.currentAction == 'jump') {
+				this.jumping = false;
 				this.doAction('fall');
+			} else if (this.currentAction == 'fall') {
+				this.falling = false;
+				if (this.keysDown.indexOf(38) != -1) this.doAction('jump');
 			}
 		}
     };
