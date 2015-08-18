@@ -50,9 +50,6 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 
 				createjs.Ticker.timingMode = createjs.Ticker.RAF;
 				createjs.Ticker.addEventListener("tick", this.stage);
-
-				document.addEventListener('keydown', this.onKeyDown.bind(this), false);
-				document.addEventListener('keyup', this.onKeyUp.bind(this), false);
 			}.bind(this));
 		},
 
