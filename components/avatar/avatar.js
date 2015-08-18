@@ -17,6 +17,7 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 		this.moving = false;
 		this.keysDown = [];
 
+		this.init();
     }
 
     Avatar.prototype = {

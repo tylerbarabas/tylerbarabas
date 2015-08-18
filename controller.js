@@ -15,7 +15,6 @@ function(Environment,Avatar){
         this.environment.changeState('day');
 
         this.avatar = new Avatar;
-        this.avatar.init();
 
         document.addEventListener('keydown', this.onKeyDown.bind(this), false);
         document.addEventListener('keyup', this.onKeyUp.bind(this), false);
@@ -25,7 +24,7 @@ function(Environment,Avatar){
         if (this.keysDown.indexOf(event.which) != -1) return;
         this.keysDown.push(event.which);
 
-        switch(event.which) {
+        switch (event.which) {
             case 40:
                 if (!this.environment.inTransition && this.currentStateIndex === 0)
                     this.currentStateIndex = 1;
