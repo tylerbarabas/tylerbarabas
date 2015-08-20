@@ -44,7 +44,7 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 					left: parseInt(this.domContainer.style.left.split('p')[0])
 				};
 
-				this.changeSprite('idle');
+				this.changeSprite('guitar');
 				this.walking = false;
 				this.jumping = false;
 				this.falling = false;
@@ -143,6 +143,10 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 
 					this.changeSprite('walk');
 					this.moveTo(newPosition,time);
+					break;
+
+				case 'guitar':
+					this.changeSprite('guitar');
 					break;
 
 				case 'idle':

@@ -26,7 +26,7 @@ function(Environment,Avatar){
         this.keysDown.push(event.which);
 
         switch (event.which) {
-            case 40:
+            case 32:
                 if (!this.environment.inTransition && this.currentStateIndex === 0)
                     this.currentStateIndex = 1;
                 else if (!this.environment.inTransition)
@@ -34,6 +34,9 @@ function(Environment,Avatar){
 
                 this.currentEnvironmentState = this.environmentStates[this.currentStateIndex];
                 this.environment.changeState(this.currentEnvironmentState);
+                break;
+            case 40:
+                this.avatar.doAction('guitar');
                 break;
             case 37:
                 this.avatar.doAction('walk-left');

@@ -3,18 +3,23 @@
 	"animations": {
 	        "still": {
 	            "next": false,
-	            "frames": [0]
+	            "frames": [5]
 	        },
 		"idle": {
 		    "next": true,
 		    "speed": 0.2,
 		    "frames": [5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,4,4,4,4,4]
 		},
-	        "walk": {
-	            "next": true,
-	            "speed": 0.2,
-	            "frames": [6,7,8,9]
-        	}
+		"walk": {
+			"next": true,
+			"speed": 0.2,
+			"frames": [6,7,8,7]
+		},
+	  "guitar": {
+		"next": true,
+		"speed": 0.3,
+		"frames": [0,1,2,3,2,1]
+	  }
 	},
 	"images": ["components/avatar/img/tyler.png"]
 }
