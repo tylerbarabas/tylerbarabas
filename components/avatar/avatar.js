@@ -23,7 +23,7 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
     Avatar.prototype = {
 		init: function() {
 
-			this.parentContainer = document.getElementById('sky');
+			this.parentContainer = document.getElementById('body');
 			this.domContainer = document.createElement('canvas');
 			this.domContainer.id = 'avatar-container';
 			this.parentContainer.appendChild(this.domContainer);
@@ -36,15 +36,15 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 
 				this.domContainer.height = this.data.frames.height;
 				this.domContainer.width = this.data.frames.width;
-				this.domContainer.style.bottom = '150px';
-				this.domContainer.style.left = window.innerHeight/2+'px';
+				this.domContainer.style.bottom = '110px';
+				this.domContainer.style.left = this.parentContainer.getBoundingClientRect().right/2 - (this.domContainer.offsetWidth / 2);
 
 				this.currentPosition = {
-					bottom: 150,
+					bottom: parseInt(this.domContainer.style.bottom.split('p')[0]),
 					left: parseInt(this.domContainer.style.left.split('p')[0])
 				};
 
-				this.changeSprite('guitar');
+				this.changeSprite('idle');
 				this.walking = false;
 				this.jumping = false;
 				this.falling = false;
@@ -125,7 +125,7 @@ define(['lib/Ajax/ajax.js'], function (Ajax) {
 						bottom: this.currentPosition.bottom,
 						left: this.currentPosition.left
 					};
-					newPosition.bottom = 150;
+					newPosition.bottom = 110;
 					this.moveTo(newPosition,300);
 					break;
 

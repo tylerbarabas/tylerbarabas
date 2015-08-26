@@ -66,7 +66,7 @@ function(Environment,Avatar){
 
     Controller.prototype.onClick = function(event) {
         var newPosition = {
-            bottom: 150,
+            bottom: 110,
             left: event.x-50
         };
         this.avatar.doAction('walk-to',newPosition);
