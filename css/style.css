@@ -377,9 +377,10 @@ body {
 	width: 100%;
 }
 
-#world-container #singer-songwriter {
+#world-container #singer-songwriter, #world-container #coder {
 	height: 100%;
 	width: 100%;
+	opacity: 0;
 }
 
 #world-container #singer-songwriter #hut {
@@ -413,21 +414,16 @@ body {
 	font-family: 'Pacifico', cursive;
 }
 
-#world-container #coder {
-	height: 100%;
-	width: 100%;
-}
-
 #world-container #coder #skyscraper {
 	background-image: url(../img/skyscraper.png);
-	background-size: auto 100%;
+	background-size: 80% 100%;
 	background-repeat: no-repeat;
-	height: 79%;
-	width: 54%;
+	background-position-x: -150px;
+	height: 100%;
+	width: 73%;
 	position: absolute;
-	bottom: 70px;
-	left: -1%;
-	opacity: 1;
+	bottom: 100px;
+	left: 0;
 }
 #world-container #coder h1.title{
 	position: absolute;

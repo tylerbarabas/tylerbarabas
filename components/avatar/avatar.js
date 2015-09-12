@@ -11,11 +11,8 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
 		this.parentContainer = null;
 		this.currentPosition = null;
 		this.currentAction = null;
-		this.walking = false;
 		this.jumping = false;
 		this.falling = false;
-		this.moving = false;
-		this.keysDown = [];
 
 		this.init();
     }
@@ -45,9 +42,6 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
 				};
 
 				this.changeSprite('idle');
-				this.walking = false;
-				this.jumping = false;
-				this.falling = false;
 
 				createjs.Ticker.timingMode = createjs.Ticker.RAF;
 				createjs.Ticker.addEventListener("tick", this.stage);
@@ -67,14 +61,12 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
 		},
 
 		doAction: function (action,newPosition) {
-			if ((this.walking || this.jumping || this.falling) && action != 'idle') return;
 			this.currentAction = action;
 
 			if (typeof newPosition == 'undefined') newPosition = null;
 
 			switch(action) {
 				case 'walk-right':
-					this.walking = true;
 					this.domContainer.style.transform = "rotateY(0deg)";
 					this.changeSprite('walk');
 
@@ -83,16 +75,21 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
 						this.domContainer.style.left = this.currentPosition.left;
 					}
 					newPosition = {
-						bottom: this.currentPosition.bottom,
 						left: this.currentPosition.left
 					};
 					newPosition.left += 10;
-					this.moveTo(newPosition,60);
+					this.moveTo(newPosition,60,function(){
+						console.log('Walk-right callback',window.keysDown);
+						if (window.keysDown.indexOf(39) !== -1)
+							this.doAction('walk-right');
+						else {
+							this.doAction('idle');
+						}
+					}.bind(this));
 
 					break;
 				
 				case 'walk-left':
-					this.walking = true;
 					this.domContainer.style.transform = "rotateY(180deg)";
 					this.changeSprite('walk');
 
@@ -101,36 +98,46 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
 						this.domContainer.style.left = this.currentPosition.left;
 					}
 					newPosition = {
-						bottom: this.currentPosition.bottom,
 						left: this.currentPosition.left
 					};
 					newPosition.left -= 10;
-					this.moveTo(newPosition,60);
+					this.moveTo(newPosition,60,function(){
+						console.log('Walk-left callback',window.keysDown);
+						if (window.keysDown.indexOf(37) !== -1)
+							this.doAction('walk-left');
+						else {
+							this.doAction('idle');
+						}
+					}.bind(this));
 
 					break;
 
 				case 'jump':
+					if (this.jumping || this.falling) return;
 					this.jumping = true;
 					newPosition = {
-						bottom: this.currentPosition.bottom,
-						left: this.currentPosition.left
+						bottom: this.currentPosition.bottom
 					};
 					newPosition.bottom = 350;
-					this.moveTo(newPosition,300);
+					this.moveTo(newPosition,300,function(){
+						this.jumping = false;
+						this.doAction('fall');
+					});
 					break;
 
 				case 'fall':
 					this.falling = true;
 					newPosition = {
-						bottom: this.currentPosition.bottom,
-						left: this.currentPosition.left
+						bottom: this.currentPosition.bottom
 					};
 					newPosition.bottom = 110;
-					this.moveTo(newPosition,300);
+					this.moveTo(newPosition,300,function(){
+						this.falling = false;
+						if (window.keysDown.indexOf(38) !== -1) this.doAction('jump');
+					});
 					break;
 
 				case 'walk-to':
-					this.walking = true;
 					if (this.currentPosition.left > newPosition.left) {
 						this.domContainer.style.transform = "rotateY(180deg)";
 					} else {
@@ -142,7 +149,9 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
 					var time = distance/(ratePerSec/1000);
 
 					this.changeSprite('walk');
-					this.moveTo(newPosition,time);
+					this.moveTo(newPosition,time,function(){
+						this.doAction('idle');
+					});
 					break;
 
 				case 'guitar':
@@ -158,35 +167,24 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
 			}
 		},
 
-		moveTo: function(toPos,time) {
-			if (this.moving) return;
+		moveTo: function(toPos,time,callback) {
+
+			if (typeof callback === 'undefined') callback = function(){};
 
 			this.moving = true;
 			this.tween = createjs.Tween.get(this.currentPosition);
 			this.tween.addEventListener('change', function () {
-				this.domContainer.style.bottom = this.currentPosition.bottom + 'px';
-				this.domContainer.style.left = this.currentPosition.left + 'px';
+				if (typeof toPos.bottom !== 'undefined') {
+					this.domContainer.style.bottom = this.currentPosition.bottom + 'px';
+				}
+				if (typeof toPos.left !== 'undefined') {
+					this.domContainer.style.left = this.currentPosition.left + 'px';
+				}
 			}.bind(this));
 
-			this.tween.to(toPos, time).call(this.moveComplete, [], this);
-		},
-
-		moveComplete: function(){
-			this.moving = false;
-			if ((this.currentAction == 'walk-right' || this.currentAction == 'walk-left') && this.walking) {
-				this.walking = false;
-				this.doAction(this.currentAction);
-			} else if (this.currentAction == 'walk-to') {
-				this.walking = false;
-				this.doAction('idle');
-			} else if (this.currentAction == 'jump') {
-				this.jumping = false;
-				this.doAction('fall');
-			} else if (this.currentAction == 'fall') {
-				this.falling = false;
-				if (this.keysDown.indexOf(38) != -1) this.doAction('jump');
-			}
+			this.tween.to(toPos, time).call(callback, [], this);
 		}
+
     };
 
     return Avatar;
