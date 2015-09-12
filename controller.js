@@ -1,5 +1,5 @@
-require(['components/environment/environment.js', 'components/avatar/avatar.js'],
-function(Environment,Avatar){
+require(['components/environment/environment.js', 'components/avatar/avatar.js', 'components/world/world.js'],
+function(Environment,Avatar,World){
 
     function Controller () {
         
@@ -15,6 +15,16 @@ function(Environment,Avatar){
         this.environment.changeState('day');
 
         this.avatar = new Avatar;
+
+        this.world = new World;
+
+        this.world.changeWorld('singer-songwriter');
+
+        setInterval(function(){
+            var worlds = ['all','coder','singer-songwriter'];
+            var changeTo = worlds[Math.floor(Math.random()*worlds.length)];
+            this.world.changeWorld(changeTo);
+        }.bind(this),5000);
 
         document.addEventListener('keydown', this.onKeyDown.bind(this), false);
         document.addEventListener('keyup', this.onKeyUp.bind(this), false);

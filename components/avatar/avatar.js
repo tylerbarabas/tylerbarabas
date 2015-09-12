@@ -1,4 +1,4 @@
-define(['lib/Ajax/ajax.js'], function (Ajax) {
+define(['/lib/Ajax/ajax.js'], function (Ajax) {
     "use strict";
 
     function Avatar() {
