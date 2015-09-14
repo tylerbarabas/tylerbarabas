@@ -3,22 +3,37 @@ define([], function () {
 
     function World() {
 
-        this.worlds = document.getElementsByClassName('world');
-
+        this.worlds = null;
         this.worldsObjects = {
             coder: {},
             singerSongwriter: {}
         };
 
-        this.worldsObjects.coder.skyScraper = document.getElementById('skyscraper');
-
-        this.worldsObjects.singerSongwriter.campfire = document.getElementById('campfire');
-        this.worldsObjects.singerSongwriter.hut = document.getElementById('hut');
-
         this.inTransition = false;
+
+        this.init();
     }
 
     World.prototype = {
+
+        init: function(){
+
+            this.worlds = document.getElementsByClassName('world');
+            this.avatarContainer = document.getElementById('avatar-container');
+            this.worldsObjects.coder.skyScraper = document.getElementById('skyscraper');
+            this.worldsObjects.singerSongwriter.campfire = document.getElementById('campfire');
+            this.worldsObjects.singerSongwriter.hut = document.getElementById('hut');
+
+
+            this.avatarContainer.addEventListener('doneWalking',function(event){
+                if (event.side == 'left') {
+                    this.changeWorld('coder');
+                } else if (event.side == 'right') {
+                    this.changeWorld('singer-songwriter');
+                }
+            }.bind(this));
+
+        },
 
         changeWorld: function (world) {
             if (this.inTransition == true) return;

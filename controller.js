@@ -1,5 +1,5 @@
-require(['components/environment/environment.js', 'components/avatar/avatar.js', 'components/world/world.js'],
-function(Environment,Avatar,World){
+require(['components/avatar/avatar.js', 'components/environment/environment.js', 'components/world/world.js'],
+function(Avatar,Environment,World){
 
     function Controller () {
         

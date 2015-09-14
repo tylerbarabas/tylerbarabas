@@ -10,7 +10,6 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
 		this.domContainer = null;
 		this.parentContainer = null;
 		this.currentPosition = null;
-		this.currentAction = null;
 		this.jumping = false;
 		this.falling = false;
 
@@ -21,8 +20,7 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
 		init: function() {
 
 			this.parentContainer = document.getElementById('body');
-			this.domContainer = document.createElement('canvas');
-			this.domContainer.id = 'avatar-container';
+			this.domContainer = document.getElementById('avatar-container');
 			this.parentContainer.appendChild(this.domContainer);
 
 			Ajax.get('components/avatar/json/tyler.json', function(data){
@@ -61,7 +59,6 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
 		},
 
 		doAction: function (action,newPosition) {
-			this.currentAction = action;
 
 			if (typeof newPosition == 'undefined') newPosition = null;
 
@@ -79,11 +76,10 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
 					};
 					newPosition.left += 10;
 					this.moveTo(newPosition,60,function(){
-						console.log('Walk-right callback',window.keysDown);
 						if (window.keysDown.indexOf(39) !== -1)
 							this.doAction('walk-right');
 						else {
-							this.doAction('idle');
+							this.doneWalking();
 						}
 					}.bind(this));
 
@@ -102,11 +98,10 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
 					};
 					newPosition.left -= 10;
 					this.moveTo(newPosition,60,function(){
-						console.log('Walk-left callback',window.keysDown);
 						if (window.keysDown.indexOf(37) !== -1)
 							this.doAction('walk-left');
 						else {
-							this.doAction('idle');
+							this.doneWalking();
 						}
 					}.bind(this));
 
@@ -150,11 +145,12 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
 
 					this.changeSprite('walk');
 					this.moveTo(newPosition,time,function(){
-						this.doAction('idle');
+						this.doneWalking();
 					});
 					break;
 
 				case 'guitar':
+					this.domContainer.style.transform = "rotateY(0deg)";
 					this.changeSprite('guitar');
 					break;
 
@@ -183,6 +179,21 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
 			}.bind(this));
 
 			this.tween.to(toPos, time).call(callback, [], this);
+		},
+
+		doneWalking: function() {
+			var view = document.body.getBoundingClientRect(),
+				event = new Event('doneWalking');
+
+			if (this.currentPosition.left < view.width/2.2) {
+				event.side = 'left';
+				this.doAction('idle');
+			} else {
+				event.side = 'right';
+				this.doAction('guitar');
+			}
+
+			this.domContainer.dispatchEvent(event);
 		}
 
     };
