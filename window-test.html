@@ -6,35 +6,41 @@
 <img src="img/haloween2010.jpg">
 </body>
 <script>
+
+    var windowHeight = window.innerHeight,
+        windowWidth = window.innerWidth;
+
     var resizePage = function(event) {
-        var original = {
-            width: 800,
-            height: 600
-        };
 
-        var img = document.body.getElementsByTagName('IMG'),
-            div = document.body.getElementsByTagName('DIV');
+        console.log('resizePage',event);
 
-        var height = window.innerHeight,
-            width = window.innerWidth,
+        var img = document.body.getElementsByTagName('IMG');
+
+        var newHeight = window.innerHeight,
+            newWidth = window.innerWidth,
             ratio = {
-                height: height / original.height,
-                width: width / original.width
+                height: newHeight / windowHeight,
+                width: newWidth / windowWidth
             };
 
         for (var i=0; i<img.length; i++) {
 
-            var imgHeight = (typeof img[i].style.height !== 'undefined') ? parseInt(img[i].style.height.split('p')[0]) : img[i].naturalHeight,
-                imgWidth = (typeof img[i].style.width !== 'undefined') ? parseInt(img[i].style.width.split('p')[0]) : img[i].naturalWidth;
+            console.log(img[i].offsetHeight,img[i].offsetWidth);
 
-            console.log(img[i].height,img[i].width,img[i].getBoundingClientRect());
+            img[i].style.height = (img[i].offsetHeight*ratio.height)+'px';
+            img[i].style.width = (img[i].offsetWidth*ratio.width)+'px';
+        }
 
-//            img[i].style.height = (imgHeight*ratio.height)+'px';
-//            img[i].style.width = (imgWidth*ratio.width)+'px';
+        windowHeight = window.innerHeight;
+        windowWidth = window.innerWidth;
+    };
+
+    window.addEventListener('resize',resizePage);
+    document.onreadystatechange = function (event) {
+        if (document.readyState == "complete") {
+            resizePage(event);
         }
     };
-    resizePage();
-    window.addEventListener('resize',resizePage);
 </script>
 
 </html>
