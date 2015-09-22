@@ -1,0 +1,36 @@
+<html>
+<head>
+
+</head>
+<body>
+<img src="img/haloween2010.jpg">
+</body>
+<script>
+    var resizePage = function(event) {
+        var original = {
+            width: 800,
+            height: 600
+        };
+
+        var img = document.body.getElementsByTagName('IMG'),
+            div = document.body.getElementsByTagName('DIV');
+
+        var height = window.innerHeight,
+            width = window.innerWidth,
+            ratio = {
+                height: height / original.height,
+                width: width / original.width
+            };
+
+        for (var i=0; i<img.length; i++) {
+
+
+            img[i].style.height = (original.height*ratio.height)+'px';
+            img[i].style.width = (original.width*ratio.width)+'px';
+        }
+    };
+    resizePage();
+    window.addEventListener('resize',resizePage);
+</script>
+
+</html>

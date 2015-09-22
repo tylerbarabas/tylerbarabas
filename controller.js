@@ -1,5 +1,5 @@
-require(['components/avatar/avatar.js', 'components/environment/environment.js', 'components/world/world.js'],
-function(Avatar,Environment,World){
+require(['components/avatar/avatar.js', 'components/environment/environment.js', 'components/world/world.js', 'lib/screen_compatible/screen_compatible.js'],
+function(Avatar,Environment,World,ScreenCompatible){
 
     function Controller () {
         
@@ -8,6 +8,7 @@ function(Avatar,Environment,World){
         this.currentStateIndex = 0;
         this.environmentStates = ['day','night'];
         window.keysDown = [];
+        ScreenCompatible.init();
     }
     
     Controller.prototype.init = function () {
