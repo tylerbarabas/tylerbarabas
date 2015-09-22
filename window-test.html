@@ -24,9 +24,13 @@
 
         for (var i=0; i<img.length; i++) {
 
+            var imgHeight = (typeof img[i].style.height !== 'undefined') ? parseInt(img[i].style.height.split('p')[0]) : img[i].naturalHeight,
+                imgWidth = (typeof img[i].style.width !== 'undefined') ? parseInt(img[i].style.width.split('p')[0]) : img[i].naturalWidth;
 
-            img[i].style.height = (original.height*ratio.height)+'px';
-            img[i].style.width = (original.width*ratio.width)+'px';
+            console.log(img[i].height,img[i].width,img[i].getBoundingClientRect());
+
+//            img[i].style.height = (imgHeight*ratio.height)+'px';
+//            img[i].style.width = (imgWidth*ratio.width)+'px';
         }
     };
     resizePage();
