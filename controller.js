@@ -2,7 +2,7 @@ require(['components/avatar/avatar.js', 'components/environment/environment.js',
 function(Avatar,Environment,World,ScreenCompatible){
 
     function Controller () {
-        
+
         this.environment = null;
         this.avatar = null;
         this.currentStateIndex = 0;
@@ -10,14 +10,14 @@ function(Avatar,Environment,World,ScreenCompatible){
         window.keysDown = [];
         ScreenCompatible.init();
     }
-    
+
     Controller.prototype.init = function () {
-        this.environment = new Environment;
+        this.environment = new Environment();
         this.environment.changeState('day');
 
-        this.avatar = new Avatar;
+        this.avatar = new Avatar();
 
-        this.world = new World;
+        this.world = new World();
 
         this.world.changeWorld('all');
 
@@ -70,6 +70,6 @@ function(Avatar,Environment,World,ScreenCompatible){
         this.avatar.doAction('walk-to',newPosition);
     };
 
-    var controller = new Controller;
+    var controller = new Controller();
     controller.init();
 });
