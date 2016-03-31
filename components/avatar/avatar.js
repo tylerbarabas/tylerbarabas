@@ -36,7 +36,7 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
 
 				this.currentPosition = {
 					bottom: parseInt(this.domContainer.style.bottom.split('p')[0]),
-					left: parseInt(this.domContainer.style.left.split('p')[0])
+					left: parseInt(this.domContainer.style.left.split('p')[0])*window.pageScale
 				};
 
 				this.changeSprite('idle');
@@ -68,13 +68,13 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
 					this.changeSprite('walk');
 
 					if (this.currentPosition.left > window.innerWidth+10) {
-						this.currentPosition.left = -50;
+						this.currentPosition.left = -20;
 						this.domContainer.style.left = this.currentPosition.left;
 					}
 					newPosition = {
 						left: this.currentPosition.left
 					};
-					newPosition.left += 10;
+					newPosition.left += 30;
 					this.moveTo(newPosition,60,function(){
 						if (window.keysDown.indexOf(39) !== -1)
 							this.doAction('walk-right');
@@ -96,7 +96,7 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
 					newPosition = {
 						left: this.currentPosition.left
 					};
-					newPosition.left -= 10;
+					newPosition.left -= 30;
 					this.moveTo(newPosition,60,function(){
 						if (window.keysDown.indexOf(37) !== -1)
 							this.doAction('walk-left');
@@ -138,7 +138,7 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
 					} else {
 						this.domContainer.style.transform = "rotateY(0deg)";
 					}
-					var ratePerSec = 250;
+					var ratePerSec = 500;
 					var distance = this.currentPosition.left - newPosition.left;
 					distance = (distance<0)?distance*-1:distance;
 					var time = distance/(ratePerSec/1000);
@@ -171,7 +171,7 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
 			this.tween = createjs.Tween.get(this.currentPosition);
 			this.tween.addEventListener('change', function () {
 				if (typeof toPos.bottom !== 'undefined') {
-					this.domContainer.style.bottom = this.currentPosition.bottom / window.pageScale + 'px';
+					this.domContainer.style.bottom = this.currentPosition.bottom + 'px';
 				}
 				if (typeof toPos.left !== 'undefined') {
 					this.domContainer.style.left = this.currentPosition.left / window.pageScale + 'px';

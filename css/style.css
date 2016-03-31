@@ -41,21 +41,21 @@ body {
 
 #environment #stars.day {
 
-	-webkit-transition: opacity 5s; /* Safari */
-    transition: opacity 5s;
+	-webkit-transition: opacity 2.5s; /* Safari */
+    transition: opacity 2.5s;
 	opacity: 0;
 }
 
 #environment #stars.night {
 
-	-webkit-transition: opacity 20s; /* Safari */
-    transition: opacity 20s;
+	-webkit-transition: opacity 10s; /* Safari */
+    transition: opacity 10s;
 	opacity: .8;
 }
 
 #environment #sky.day {
 	animation-name: sky_day;
-	animation-duration: 6s;
+	animation-duration: 3s;
 	animation-timing-function: ease;
 	animation-iteration-count: 1;
 	animation-direction: normal;
@@ -65,7 +65,7 @@ body {
 }
 #environment #sky.night {
     animation-name: sky_night;
-    animation-duration: 6s;
+    animation-duration: 3s;
     animation-timing-function: ease;
     animation-iteration-count: 1;
     animation-direction: normal;
@@ -111,7 +111,7 @@ body {
 
 #environment #moon.day {
 	animation-name: moon_day;
-	animation-duration: 10s;
+	animation-duration: 5s;
 	animation-timing-function: ease;
 	animation-iteration-count: 1;
 	animation-direction: normal;
@@ -122,7 +122,7 @@ body {
 
 #environment #moon.night {
 	animation-name: moon_night;
-	animation-duration: 10s;
+	animation-duration: 5s;
 	animation-timing-function: ease;
 	animation-iteration-count: 1;
 	animation-direction: normal;
@@ -181,7 +181,7 @@ body {
 
 #environment #sun.day {
 	animation-name: sunrise;
-	animation-duration: 6s;
+	animation-duration: 3s;
 	animation-timing-function: ease;
 	animation-iteration-count: 1;
 	animation-direction: normal;
@@ -192,7 +192,7 @@ body {
 
 #environment #sun.night {
     animation-name: sundown;
-    animation-duration: 6s;
+    animation-duration: 3s;
     animation-timing-function: ease;
     animation-iteration-count: 1;
     animation-direction: normal;
@@ -245,7 +245,7 @@ body {
 
 #environment #ground.day {
 	animation-name: ground_day;
-	animation-duration: 6s;
+	animation-duration: 3s;
 	animation-timing-function: ease;
 	animation-iteration-count: 1;
 	animation-direction: normal;
@@ -256,7 +256,7 @@ body {
 
 #environment #ground.night {
     animation-name: ground_night;
-    animation-duration: 6s;
+    animation-duration: 3s;
     animation-timing-function: ease;
     animation-iteration-count: 1;
     animation-direction: normal;
@@ -294,7 +294,7 @@ body {
 
 #environment #cloud.day {
     animation-name: cloud_in;
-    animation-duration: 8s;
+    animation-duration: 4s;
     animation-timing-function: ease;
     animation-iteration-count: 1;
     animation-direction: normal;
@@ -305,7 +305,7 @@ body {
 
 #environment #cloud.night {
 	animation-name: cloud_out;
-	animation-duration: 8s;
+	animation-duration: 4s;
 	animation-timing-function: ease;
 	animation-iteration-count: 1;
 	animation-direction: normal;
