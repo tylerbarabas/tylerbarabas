@@ -1,8 +1,19 @@
-body, html { 
+html {
     overflow: hidden;
 }
 body {
-    position: relative;
+    background-color: #000;
+    transform-origin: 0 0;
+
+}
+#stage {
+  position: absolute;
+
+  width: 1200px;
+  height: 650px;
+
+  overflow: hidden;
+  visibility: hidden;
 }
 .main-content-font {
 	font-size: 30px;
@@ -46,7 +57,7 @@ body {
 	animation-name: sky_day;
 	animation-duration: 6s;
 	animation-timing-function: ease;
-	animation-iteration-count: 1;	
+	animation-iteration-count: 1;
 	animation-direction: normal;
 	animation-delay: 0;
 	animation-play-state: running;
@@ -68,7 +79,7 @@ body {
 	0% {
 		background-color: #525252;
 	}
-	
+
 	100% {
 		background-color: #6293e5;
 	}
@@ -131,7 +142,7 @@ body {
 		opacity: 0;
 		left: -100px;
 	}
-	
+
 	100% {
 		opacity: 0;
 		left: -100px;
@@ -150,7 +161,7 @@ body {
 		opacity: 0;
 		left: -100px;
 	}
-	
+
 	100% {
 		opacity: 1;
 		left: 50px;
@@ -172,7 +183,7 @@ body {
 	animation-name: sunrise;
 	animation-duration: 6s;
 	animation-timing-function: ease;
-	animation-iteration-count: 1;	
+	animation-iteration-count: 1;
 	animation-direction: normal;
 	animation-delay: 0;
 	animation-play-state: running;
@@ -196,7 +207,7 @@ body {
 		top: 80%;
 		background: #f00;
 	}
-	
+
 	100% {
 		top: 2%;
 		background: #ffd630;
@@ -236,7 +247,7 @@ body {
 	animation-name: ground_day;
 	animation-duration: 6s;
 	animation-timing-function: ease;
-	animation-iteration-count: 1;	
+	animation-iteration-count: 1;
 	animation-direction: normal;
 	animation-delay: 0;
 	animation-play-state: running;
@@ -296,7 +307,7 @@ body {
 	animation-name: cloud_out;
 	animation-duration: 8s;
 	animation-timing-function: ease;
-	animation-iteration-count: 1;	
+	animation-iteration-count: 1;
 	animation-direction: normal;
 	animation-delay: 0;
 	animation-play-state: running;
@@ -340,7 +351,7 @@ body {
 		opacity: 0;
 		left: 0;
 	}
-	
+
 	50% {
 		opacity: 0;
 		left: 0;
@@ -384,14 +395,14 @@ body {
 }
 
 #world-container #singer-songwriter #hut {
-	background-image: url(../img/hut.png);
-	background-size: auto 100%;
-	background-repeat: no-repeat;
-	height: 40%;
-	width: 30%;
-	position: absolute;
-	bottom: 170px;
-	right: 0%;
+  background-image: url(../img/hut.png);
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  height: 300px;
+  width: 329px;
+  position: absolute;
+  bottom: 170px;
+  right: 0;
 }
 
 #world-container #singer-songwriter #campfire {
@@ -409,27 +420,26 @@ body {
 	position: absolute;
 	z-index: 1;
 	bottom: 50px;
-	left: 64%;
+	right: 115px;
 	color: #ffffff;
 	font-family: 'Pacifico', cursive;
 }
 
 #world-container #coder #skyscraper {
-	background-image: url(../img/skyscraper.png);
-	background-size: 100% 100%;
-	background-repeat: no-repeat;
-	background-position-x: -150px;
-	height: 100%;
-	width: 52%;
-	position: absolute;
-	bottom: 140px;
-	left: 0;
+  background-image: url(../img/skyscraper.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 500px;
+  width: 490px;
+  position: absolute;
+  top: 10px;
+  left: 0;
 }
 #world-container #coder h1.title{
 	position: absolute;
 	z-index: 1;
 	bottom: 40px;
-	left: 20%;
+	left: 70px;
 	color: #ffffff;
 	font-family: 'Orbitron', sans-serif;
 }
@@ -437,8 +447,8 @@ body {
 #avatar-container {
 	position: absolute;
 	z-index: 2;
-	height: 130px;
-	width: 130px;
+	height: 100px;
+	width: 100px;
 }
 
 #divider {
@@ -493,4 +503,17 @@ body {
 	100% {
 		opacity: 1;
 	}
+}
+
+#shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  height: 100%;
+  width: 100%;
+
+  box-shadow: inset 0px 0px 10px 10px #000000;
+  outline: 2px solid #000000;
 }

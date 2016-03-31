@@ -2,7 +2,7 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
     "use strict";
 
     function Avatar() {
-    
+
 		this.data = null;
 		this.spritesheet = null;
 		this.animation = null;
@@ -19,7 +19,7 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
     Avatar.prototype = {
 		init: function() {
 
-			this.parentContainer = document.getElementById('body');
+			this.parentContainer = document.getElementById('stage');
 			this.domContainer = document.getElementById('avatar-container');
 			this.parentContainer.appendChild(this.domContainer);
 
@@ -32,7 +32,7 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
 				this.domContainer.height = this.data.frames.height;
 				this.domContainer.width = this.data.frames.width;
 				this.domContainer.style.bottom = '110px';
-				this.domContainer.style.left = this.parentContainer.getBoundingClientRect().right/2 - (this.domContainer.offsetWidth / 2);
+				this.domContainer.style.left = this.parentContainer.offsetWidth/2 - (this.domContainer.offsetWidth / 2)+'px';
 
 				this.currentPosition = {
 					bottom: parseInt(this.domContainer.style.bottom.split('p')[0]),
@@ -50,7 +50,7 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
 			if (typeof seq != 'string') return;
 			if (this.currentAnim == seq) return;
 
-			if (this.stage != null) this.stage.removeChild(this.animation);
+			if (this.stage !== null) this.stage.removeChild(this.animation);
 
 			this.currentAnim = seq;
 			this.animation = new createjs.Sprite(this.spritesheet, this.currentAnim);
@@ -84,7 +84,7 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
 					}.bind(this));
 
 					break;
-				
+
 				case 'walk-left':
 					this.domContainer.style.transform = "rotateY(180deg)";
 					this.changeSprite('walk');
@@ -171,10 +171,10 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
 			this.tween = createjs.Tween.get(this.currentPosition);
 			this.tween.addEventListener('change', function () {
 				if (typeof toPos.bottom !== 'undefined') {
-					this.domContainer.style.bottom = this.currentPosition.bottom + 'px';
+					this.domContainer.style.bottom = this.currentPosition.bottom / window.pageScale + 'px';
 				}
 				if (typeof toPos.left !== 'undefined') {
-					this.domContainer.style.left = this.currentPosition.left + 'px';
+					this.domContainer.style.left = this.currentPosition.left / window.pageScale + 'px';
 				}
 			}.bind(this));
 
@@ -185,7 +185,7 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
 			var view = document.body.getBoundingClientRect(),
 				event = new Event('doneWalking');
 
-			if (this.currentPosition.left < view.width/2.2) {
+			if ((this.currentPosition.left/window.pageScale) < this.parentContainer.offsetWidth/2.2) {
 				event.side = 'left';
 				this.doAction('idle');
 			} else {

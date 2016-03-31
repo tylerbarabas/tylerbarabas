@@ -29,13 +29,13 @@ define([], function () {
 
             this.avatarContainer = document.getElementById('avatar-container');
 
-            this.avatarContainer.addEventListener('doneWalking',function(event){
-                if (event.side == 'left') {
-                    this.changeState('day');
-                } else if (event.side == 'right') {
-                    this.changeState('night');
-                }
-            }.bind(this));
+            // this.avatarContainer.addEventListener('doneWalking',function(event){
+            //     if (event.side == 'left') {
+            //         this.changeState('day');
+            //     } else if (event.side == 'right') {
+            //         this.changeState('night');
+            //     }
+            // }.bind(this));
         },
 
         changeState: function (state) {

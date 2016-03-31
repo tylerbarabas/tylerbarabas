@@ -29,7 +29,6 @@ function(Avatar,Environment,World,ScreenCompatible){
     Controller.prototype.onKeyDown = function (event) {
         if (window.keysDown.indexOf(event.which) != -1) return;
         window.keysDown.push(event.which);
-        console.log('key down',window.keysDown);
 
         switch (event.which) {
             case 32:
@@ -59,13 +58,12 @@ function(Avatar,Environment,World,ScreenCompatible){
     Controller.prototype.onKeyUp = function (event) {
         var index = window.keysDown.indexOf(event.which);
         window.keysDown.splice(index, 1);
-        console.log('key up',window.keysDown);
     };
 
     Controller.prototype.onClick = function(event) {
         var newPosition = {
             bottom: 110,
-            left: event.x-50
+            left: event.x-(this.avatar.domContainer.offsetWidth*0.9)
         };
         this.avatar.doAction('walk-to',newPosition);
     };
