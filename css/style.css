@@ -4,7 +4,10 @@ html {
 body {
     background-color: #000;
     transform-origin: 0 0;
-
+}
+a, a:hover, a:visited {
+  color: black;
+  text-decoration: underline;
 }
 #stage {
   position: absolute;
@@ -528,6 +531,7 @@ body {
   border-radius: 20px;
   opacity: 0;
   padding: 10px;
+  overflow-y: scroll;
   transition: all 3000ms;
 }
 
@@ -547,4 +551,18 @@ body {
 
 .modal.developer .resume-title {
   text-align: center;
+}
+
+.float-left {
+  float: left;
+  font-weight: bold;
+  font-size: 16px;
+}
+.float-right {
+  float: right;
+}
+.modal-divider {
+  display: inline-block;
+  width: 100%;
+  margin-top: 10px;
 }
