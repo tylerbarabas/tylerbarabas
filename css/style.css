@@ -522,24 +522,29 @@ body {
   position: absolute;
   top: -630px;
   z-index: 1;
-  height: 630px;
-  width: 580px;
+  height: 580px;
+  width: 560px;
   background-color: rgba(255,255,255,0.7);
   border-radius: 20px;
   opacity: 0;
-  
+  padding: 10px;
   transition: all 3000ms;
 }
 
 .modal.show {
-  top: 15px;
+  top: 30px;
   opacity: 1;
 }
 
-.modal.developer {
-  left: 10px;
+.modal.songwriter {
+  left: 20px;
 }
 
-.modal.songwriter {
-  right: 10px;
+.modal.developer {
+  right: 20px;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.modal.developer .resume-title {
+  text-align: center;
 }

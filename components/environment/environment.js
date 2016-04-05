@@ -14,7 +14,7 @@ define(['components/modal_developer/modal_developer','components/modal_songwrite
         this.inTransition = false;
 
         this.modalDeveloper = new ModalDeveloper();
-        this.ModalSongwriter = new ModalSongwriter();
+        this.modalSongwriter = new ModalSongwriter();
 
         this.init();
     }
@@ -36,14 +36,14 @@ define(['components/modal_developer/modal_developer','components/modal_songwrite
                 if (event.side === 'left') {
                   this.changeState('day');
                   
-                  this.modalDeveloper.close();
-                  this.ModalSongwriter.open();
+                  this.modalDeveloper.open();
+                  this.modalSongwriter.close();
                     
                 } else if (event.side === 'right') {
                   this.changeState('night');
                   
-                  this.modalDeveloper.open();
-                  this.ModalSongwriter.close();
+                  this.modalDeveloper.close();
+                  this.modalSongwriter.open();
                 }
             }.bind(this));
         },
