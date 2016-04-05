@@ -1,4 +1,4 @@
-define([], function () {
+define(['components/modal_developer/modal_developer','components/modal_songwriter/modal_songwriter.js'], function (ModalDeveloper,ModalSongwriter) {
     "use strict";
 
     function Environment() {
@@ -12,6 +12,9 @@ define([], function () {
         this.avatarContainer = null;
 
         this.inTransition = false;
+
+        this.modalDeveloper = new ModalDeveloper();
+        this.ModalSongwriter = new ModalSongwriter();
 
         this.init();
     }
@@ -29,17 +32,24 @@ define([], function () {
 
             this.avatarContainer = document.getElementById('avatar-container');
 
-            // this.avatarContainer.addEventListener('doneWalking',function(event){
-            //     if (event.side == 'left') {
-            //         this.changeState('day');
-            //     } else if (event.side == 'right') {
-            //         this.changeState('night');
-            //     }
-            // }.bind(this));
+            this.avatarContainer.addEventListener('doneWalking',function(event){
+                if (event.side === 'left') {
+                  this.changeState('day');
+                  
+                  this.modalDeveloper.close();
+                  this.ModalSongwriter.open();
+                    
+                } else if (event.side === 'right') {
+                  this.changeState('night');
+                  
+                  this.modalDeveloper.open();
+                  this.ModalSongwriter.close();
+                }
+            }.bind(this));
         },
 
         changeState: function (state) {
-            if (this.inTransition == true) return;
+            // if (this.inTransition === true) return;
 
             this.inTransition = true;
             this.sky.className = state;
@@ -51,7 +61,7 @@ define([], function () {
 
             setTimeout(function() {
                 this.inTransition = false;
-            }.bind(this), 9000)
+            }.bind(this), 9000);
         }
     };
 

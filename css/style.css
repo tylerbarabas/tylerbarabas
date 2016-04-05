@@ -419,8 +419,8 @@ body {
 #world-container #singer-songwriter h1.title {
 	position: absolute;
 	z-index: 1;
-	bottom: 50px;
-	right: 115px;
+	bottom: 30px;
+	right: 180px;
 	color: #ffffff;
 	font-family: 'Pacifico', cursive;
 }
@@ -429,10 +429,10 @@ body {
   background-image: url(../img/skyscraper.png);
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  height: 500px;
+  height: 400px;
   width: 490px;
   position: absolute;
-  top: 10px;
+  top: 100px;
   left: 0;
 }
 #world-container #coder h1.title{
@@ -516,4 +516,30 @@ body {
 
   box-shadow: inset 0px 0px 10px 10px #000000;
   outline: 2px solid #000000;
+}
+
+.modal {
+  position: absolute;
+  top: -630px;
+  z-index: 1;
+  height: 630px;
+  width: 580px;
+  background-color: rgba(255,255,255,0.7);
+  border-radius: 20px;
+  opacity: 0;
+  
+  transition: all 3000ms;
+}
+
+.modal.show {
+  top: 15px;
+  opacity: 1;
+}
+
+.modal.developer {
+  left: 10px;
+}
+
+.modal.songwriter {
+  right: 10px;
 }
