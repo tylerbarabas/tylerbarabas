@@ -1,4 +1,4 @@
-define(['/lib/Ajax/ajax.js'], function (Ajax) {
+define(['lib/Ajax/ajax','components/world/world','components/environment/environment', 'components/modal_developer/modal_developer', 'components/modal_songwriter/modal_songwriter'], function (Ajax,World,Environment,ModalDeveloper,ModalSongwriter) {
     "use strict";
 
     function Avatar() {
@@ -182,21 +182,33 @@ define(['/lib/Ajax/ajax.js'], function (Ajax) {
 		},
 
 		doneWalking: function() {
-			var view = document.body.getBoundingClientRect(),
-				event = new Event('doneWalking');
+			var view = document.body.getBoundingClientRect();
 
-			if ((this.currentPosition.left/window.pageScale) < this.parentContainer.offsetWidth/2.2) {
-				event.side = 'left';
+			if ((this.currentPosition.left/window.pageScale) < 447) {
 				this.doAction('idle');
-			} else {
-				event.side = 'right';
+        World.changeWorld('coder');
+        Environment.changeState('day');
+        ModalDeveloper.open();
+        ModalSongwriter.close();
+			} else if ((this.currentPosition.left/window.pageScale) > 650) {
 				this.doAction('guitar');
-			}
-
-			this.domContainer.dispatchEvent(event);
+        World.changeWorld('singer-songwriter');
+        Environment.changeState('night');
+        ModalDeveloper.close();
+        ModalSongwriter.open();
+			} else {
+        this.doAction('idle');
+        World.changeWorld('all');
+        ModalDeveloper.close();
+        ModalSongwriter.close();
+      }
 		}
 
     };
 
-    return Avatar;
+    if (typeof window.avatar === 'undefined') {
+		    window.avatar = new Avatar();
+	  }
+
+	return window.avatar;
 });

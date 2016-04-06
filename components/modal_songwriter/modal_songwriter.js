@@ -1,4 +1,4 @@
-define([], function () {
+define(['components/avatar/avatar'], function (Avatar) {
     "use strict";
 
     function ModalSongwriter() {
@@ -14,5 +14,9 @@ define([], function () {
       }
     };
 
-    return ModalSongwriter;
+    if (typeof window.modalSongwriter === 'undefined') {
+		    window.modalSongwriter = new ModalSongwriter();
+	  }
+
+	return window.modalSongwriter;
 });

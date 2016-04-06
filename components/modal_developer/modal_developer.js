@@ -1,4 +1,4 @@
-define([], function () {
+define(['components/avatar/avatar'], function (Avatar) {
     "use strict";
 
     function ModalDeveloper() {
@@ -14,5 +14,9 @@ define([], function () {
       }
     };
 
-    return ModalDeveloper;
+    if (typeof window.modalDeveloper === 'undefined') {
+		    window.modalDeveloper = new ModalDeveloper();
+	  }
+
+	return window.modalDeveloper;
 });

@@ -1,10 +1,9 @@
-require(['components/avatar/avatar.js', 'components/environment/environment.js', 'components/world/world.js', 'lib/screen_compatible/screen_compatible.js'],
-function(Avatar,Environment,World,ScreenCompatible){
+require(['components/avatar/avatar', 'components/environment/environment', 'components/world/world', 'lib/screen_compatible/screen_compatible', 'components/modal_developer/modal_developer', 'components/modal_songwriter/modal_songwriter'],
+function(Avatar,Environment,World,ScreenCompatible, ModalDeveloper, ModalSongwriter){
 
     function Controller () {
 
-        this.environment = null;
-        this.avatar = null;
+        this.environment = Environment;
         this.currentStateIndex = 0;
         this.environmentStates = ['day','night'];
         window.keysDown = [];
@@ -12,14 +11,24 @@ function(Avatar,Environment,World,ScreenCompatible){
     }
 
     Controller.prototype.init = function () {
-        this.environment = new Environment();
-        this.environment.changeState('day');
-
-        this.avatar = new Avatar();
-
-        this.world = new World();
+        this.world = World;
 
         this.world.changeWorld('all');
+
+        this.modalDeveloper = ModalDeveloper;
+        this.modalSongwriter = ModalSongwriter;
+
+        var xIcons = document.getElementsByClassName('x-icon');
+        this.xIcons = [];
+        for (var i=0;i<xIcons.length;i++){
+          this.xIcons.push(xIcons[i]);
+        }
+
+        var titles = document.getElementsByClassName('title');
+        this.titles = [];
+        for (i=0;i<titles.length;i++){
+          this.titles.push(titles[i]);
+        }
 
         document.addEventListener('keydown', this.onKeyDown.bind(this), false);
         document.addEventListener('keyup', this.onKeyUp.bind(this), false);
@@ -41,16 +50,16 @@ function(Avatar,Environment,World,ScreenCompatible){
                 this.environment.changeState(this.currentEnvironmentState);
                 break;
             case 40:
-                this.avatar.doAction('guitar');
+                Avatar.doAction('guitar');
                 break;
             case 37:
-                this.avatar.doAction('walk-left');
+                Avatar.doAction('walk-left');
                 break;
             case 38:
-                this.avatar.doAction('jump');
+                Avatar.doAction('jump');
                 break;
             case 39:
-                this.avatar.doAction('walk-right');
+                Avatar.doAction('walk-right');
                 break;
         }
     };
@@ -61,11 +70,13 @@ function(Avatar,Environment,World,ScreenCompatible){
     };
 
     Controller.prototype.onClick = function(event) {
-        var newPosition = {
-            bottom: 110,
-            left: event.x-(this.avatar.domContainer.offsetWidth*0.9)
-        };
-        this.avatar.doAction('walk-to',newPosition);
+      if (event.target ===  document.getElementById('shadow') || this.titles.indexOf(event.target) !== -1) {
+          Avatar.doAction('walk-to',{bottom: 110,left: event.x-(Avatar.domContainer.offsetWidth*0.9)});
+      } else if (this.xIcons.indexOf(event.target) !== -1) {
+        this.modalDeveloper.close();
+        this.modalSongwriter.close();
+        Avatar.doAction('walk-to',{bottom: 110,left: 550*window.pageScale});
+      }
     };
 
     var controller = new Controller();

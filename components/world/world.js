@@ -19,24 +19,23 @@ define([], function () {
         init: function(){
 
             this.worlds = document.getElementsByClassName('world');
-            this.avatarContainer = document.getElementById('avatar-container');
             this.worldsObjects.coder.skyScraper = document.getElementById('skyscraper');
             this.worldsObjects.singerSongwriter.campfire = document.getElementById('campfire');
             this.worldsObjects.singerSongwriter.hut = document.getElementById('hut');
 
 
-            this.avatarContainer.addEventListener('doneWalking',function(event){
-                if (event.side == 'left') {
-                    this.changeWorld('coder');
-                } else if (event.side == 'right') {
-                    this.changeWorld('singer-songwriter');
-                }
-            }.bind(this));
+            // this.avatarContainer.addEventListener('doneWalking',function(event){
+            //     if (event.side == 'left') {
+            //         this.changeWorld('coder');
+            //     } else if (event.side == 'right') {
+            //         this.changeWorld('singer-songwriter');
+            //     }
+            // }.bind(this));
 
         },
 
         changeWorld: function (world) {
-            if (this.inTransition == true) return;
+            // if (this.inTransition === true) return;
 
             var i = 0;
             if (world == 'all') {
@@ -57,5 +56,9 @@ define([], function () {
         }
     };
 
-    return World;
+    if (typeof window.world === 'undefined') {
+		    window.world = new World();
+	  }
+
+	return window.world;
 });
