@@ -102,7 +102,7 @@ a, a:hover, a:visited {
 #environment #moon {
 	position: absolute;
 	top: 0;
-	left: -100px;
+	right: -100px;
 
 	width: 100px;
 	height: 100px;
@@ -138,17 +138,17 @@ a, a:hover, a:visited {
 
 	0% {
 		opacity: 1;
-		left: 50px;
+		right: 50px;
 	}
 
 	50% {
 		opacity: 0;
-		left: -100px;
+		right: -100px;
 	}
 
 	100% {
 		opacity: 0;
-		left: -100px;
+		right: -100px;
 	}
 
 }
@@ -157,17 +157,17 @@ a, a:hover, a:visited {
 
 	0% {
 		opacity: 0;
-		left: -100px;
+		right: -100px;
 	}
 
 	50% {
 		opacity: 0;
-		left: -100px;
+		right: -100px;
 	}
 
 	100% {
 		opacity: 1;
-		left: 50px;
+		right: 50px;
 	}
 
 }
@@ -179,7 +179,7 @@ a, a:hover, a:visited {
     border-radius: 300px;
 
     position: absolute;
-    right: 2%;
+    left: 2%;
 }
 
 #environment #sun.day {
@@ -527,7 +527,7 @@ a, a:hover, a:visited {
   z-index: 1;
   height: 580px;
   width: 560px;
-  background-color: rgba(255,255,255,0.7);
+  background-image: url(/img/paper/02-whitepaper.png);
   border-radius: 20px;
   opacity: 0;
   padding: 10px;
@@ -537,11 +537,12 @@ a, a:hover, a:visited {
 
 .modal.show {
   top: 30px;
-  opacity: 1;
+  opacity: 0.9;
 }
 
 .modal.songwriter {
   left: 20px;
+  font-family: 'Pacifico', cursive;
 }
 
 .modal.developer {
@@ -549,7 +550,7 @@ a, a:hover, a:visited {
   font-family: 'Orbitron', sans-serif;
 }
 
-.modal.developer .resume-title {
+.modal .modal-title {
   text-align: center;
 }
 
