@@ -555,8 +555,8 @@ a, a:hover, a:visited {
 
 .modal .x-icon-container {
   position: absolute;
-  top: 3px;
-  right: 3px;
+  top: 15px;
+  right: 20px;
 }
 
 .modal .x-icon {
