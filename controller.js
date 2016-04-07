@@ -30,6 +30,7 @@ function(Avatar,Environment,World,ScreenCompatible, ModalDeveloper, ModalSongwri
           this.titles.push(titles[i]);
         }
 
+        this.stage = document.getElementById('stage');
         document.addEventListener('keydown', this.onKeyDown.bind(this), false);
         document.addEventListener('keyup', this.onKeyUp.bind(this), false);
         document.addEventListener('click',this.onClick.bind(this), false);
@@ -78,7 +79,7 @@ function(Avatar,Environment,World,ScreenCompatible, ModalDeveloper, ModalSongwri
 
     Controller.prototype.onClick = function(event) {
       if (event.target ===  document.getElementById('shadow') || this.titles.indexOf(event.target) !== -1) {
-          Avatar.doAction('walk-to',{bottom: 110,left: (event.clientX-(Avatar.domContainer.offsetWidth/1.3)*window.pageScale)});
+        Avatar.doAction('walk-to',{bottom: 110,left: event.clientX - ((window.innerWidth - (this.stage.clientWidth*window.pageScale))/2) - ((Avatar.domContainer.offsetWidth*window.pageScale)*0.6)});
       } else if (this.xIcons.indexOf(event.target) !== -1) {
         this.modalDeveloper.close();
         this.modalSongwriter.close();
