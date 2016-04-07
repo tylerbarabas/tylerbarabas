@@ -189,23 +189,31 @@ define(['lib/Ajax/ajax','components/world/world','components/environment/environ
 		},
 
 		doneWalking: function() {
-			var view = document.body.getBoundingClientRect();
+			var view = document.body.getBoundingClientRect(),
+          coder = document.getElementById('title-coder'),
+          songwriter = document.getElementById('title-songwriter');
 
 			if ((this.currentPosition.left/window.pageScale) < 447) {
 				this.doAction('idle');
         World.changeWorld('coder');
         Environment.changeState('day');
+        coder.className = 'title coder active';
+        songwriter.className = 'title songwriter';
         ModalDeveloper.open();
         ModalSongwriter.close();
 			} else if ((this.currentPosition.left/window.pageScale) > 650) {
 				this.doAction('guitar');
         World.changeWorld('singer-songwriter');
         Environment.changeState('night');
+        coder.className = 'title coder';
+        songwriter.className = 'title songwriter active';
         ModalDeveloper.close();
         ModalSongwriter.open();
 			} else {
         this.doAction('idle');
         World.changeWorld('all');
+        coder.className = 'title coder';
+        songwriter.className = 'title songwriter';
         ModalDeveloper.close();
         ModalSongwriter.close();
       }
