@@ -24,23 +24,23 @@ define(['lib/Ajax/ajax','components/world/world','components/environment/environ
 			this.parentContainer.appendChild(this.domContainer);
 
 			Ajax.get('components/avatar/json/tyler.json', function(data){
-				this.data = JSON.parse(data);
+        this.data = JSON.parse(data);
 				this.spritesheet = new createjs.SpriteSheet(this.data);
-
+        
 				this.stage = new createjs.Stage(this.domContainer);
-
+        
 				this.domContainer.height = this.data.frames.height;
 				this.domContainer.width = this.data.frames.width;
 				this.domContainer.style.bottom = '110px';
 				this.domContainer.style.left = this.parentContainer.offsetWidth/2 - (this.domContainer.offsetWidth / 2)+'px';
-
+        
 				this.currentPosition = {
 					bottom: parseInt(this.domContainer.style.bottom.split('p')[0]),
 					left: parseInt(this.domContainer.style.left.split('p')[0])*window.pageScale
 				};
-
+        
 				this.changeSprite('idle');
-
+      
 				createjs.Ticker.timingMode = createjs.Ticker.RAF;
 				createjs.Ticker.addEventListener("tick", this.stage);
 			}.bind(this));
@@ -65,6 +65,7 @@ define(['lib/Ajax/ajax','components/world/world','components/environment/environ
 			switch(action) {
 				case 'walk-right':
 					this.domContainer.style.transform = "rotateY(0deg)";
+          this.domContainer.style.mozTransform = "rotateY(180deg)";
 					this.changeSprite('walk');
 
 					if (this.currentPosition.left > window.innerWidth+10) {
@@ -87,6 +88,7 @@ define(['lib/Ajax/ajax','components/world/world','components/environment/environ
 
 				case 'walk-left':
 					this.domContainer.style.transform = "rotateY(180deg)";
+          this.domContainer.style.mozTransform = "rotateY(180deg)";
 					this.changeSprite('walk');
 
 					if (this.currentPosition.left < -50) {
@@ -135,8 +137,11 @@ define(['lib/Ajax/ajax','components/world/world','components/environment/environ
 				case 'walk-to':
 					if (this.currentPosition.left > newPosition.left) {
 						this.domContainer.style.transform = "rotateY(180deg)";
+            this.domContainer.style.mozTransform = "rotateY(180deg)";
+
 					} else {
 						this.domContainer.style.transform = "rotateY(0deg)";
+            this.domContainer.style.mozTransform = "rotateY(0deg)";
 					}
 					var ratePerSec = 500;
 					var distance = this.currentPosition.left - newPosition.left;
@@ -151,6 +156,7 @@ define(['lib/Ajax/ajax','components/world/world','components/environment/environ
 
 				case 'guitar':
 					this.domContainer.style.transform = "rotateY(0deg)";
+          this.domContainer.style.mozTransform = "rotateY(0deg)";
 					this.changeSprite('guitar');
 					break;
 
@@ -158,6 +164,7 @@ define(['lib/Ajax/ajax','components/world/world','components/environment/environ
 				default:
 					this.walking = false;
 					this.domContainer.style.transform = "rotateY(0deg)";
+          this.domContainer.style.mozTransform = "rotateY(0deg)";
 					this.changeSprite('idle');
 					break;
 			}

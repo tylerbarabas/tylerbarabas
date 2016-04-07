@@ -33,6 +33,13 @@ function(Avatar,Environment,World,ScreenCompatible, ModalDeveloper, ModalSongwri
         document.addEventListener('keydown', this.onKeyDown.bind(this), false);
         document.addEventListener('keyup', this.onKeyUp.bind(this), false);
         document.addEventListener('click',this.onClick.bind(this), false);
+            
+        var frames = document.getElementsByClassName('frame');
+        
+        for (i=0;i<frames.length;i++) {
+          var f = frames[i];
+          f.contentWindow.location.href = f.src;
+        }
     };
 
     Controller.prototype.onKeyDown = function (event) {
@@ -71,7 +78,7 @@ function(Avatar,Environment,World,ScreenCompatible, ModalDeveloper, ModalSongwri
 
     Controller.prototype.onClick = function(event) {
       if (event.target ===  document.getElementById('shadow') || this.titles.indexOf(event.target) !== -1) {
-          Avatar.doAction('walk-to',{bottom: 110,left: event.x-(Avatar.domContainer.offsetWidth*0.9)});
+          Avatar.doAction('walk-to',{bottom: 110,left: (event.clientX-(Avatar.domContainer.offsetWidth/1.3)*window.pageScale)});
       } else if (this.xIcons.indexOf(event.target) !== -1) {
         this.modalDeveloper.close();
         this.modalSongwriter.close();
