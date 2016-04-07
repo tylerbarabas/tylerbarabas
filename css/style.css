@@ -588,7 +588,7 @@ a, a:hover, a:visited {
   position: absolute;;
   z-index: 1;
   color: #ffffff;
-  cursor: pointer;
+  cursor: pointer;  
   transition: all 500ms;
 }
 
@@ -596,12 +596,14 @@ a, a:hover, a:visited {
 	bottom: 30px;
 	right: 180px;
 	font-family: 'Pacifico', cursive;
+  font-size: 35px;
 }
 
 .title.coder {
 	bottom: 40px;
-	left: 70px;
+	left: 85px;
 	font-family: 'Orbitron', sans-serif;
+  font-size: 30px;
 }
 
 .title.active {
