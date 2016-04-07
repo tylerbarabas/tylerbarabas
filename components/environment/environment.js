@@ -13,9 +13,6 @@ define([], function () {
 
         this.inTransition = false;
 
-        // this.modalDeveloper = new ModalDeveloper();
-        // this.modalSongwriter = new ModalSongwriter();
-
         this.init();
     }
 
@@ -32,26 +29,10 @@ define([], function () {
 
             this.avatarContainer = document.getElementById('avatar-container');
 
-            // this.avatarContainer.addEventListener('doneWalking',function(event){
-            //     if (event.side === 'left') {
-            //       this.changeState('day');
-            //
-            //       this.modalDeveloper.open();
-            //       this.modalSongwriter.close();
-            //
-            //     } else if (event.side === 'right') {
-            //       this.changeState('night');
-            //
-            //       this.modalDeveloper.close();
-            //       this.modalSongwriter.open();
-            //     }
-            // }.bind(this));
-
             this.changeState('day');
         },
 
         changeState: function (state) {
-            // if (this.inTransition === true) return;
 
             this.inTransition = true;
             this.sky.className = state;
