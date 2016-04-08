@@ -160,6 +160,12 @@ define(['lib/Ajax/ajax','components/world/world','components/environment/environ
 					this.changeSprite('guitar');
 					break;
 
+        case 'work':
+					this.domContainer.style.transform = "rotateY(0deg)";
+          this.domContainer.style.mozTransform = "rotateY(0deg)";
+					this.changeSprite('work');
+					break;
+
 				case 'idle':
 				default:
 					this.walking = false;
@@ -194,7 +200,7 @@ define(['lib/Ajax/ajax','components/world/world','components/environment/environ
           songwriter = document.getElementById('title-songwriter');
 
 			if ((this.currentPosition.left/window.pageScale) < 447) {
-				this.doAction('idle');
+				this.doAction('work');
         World.changeWorld('coder');
         Environment.changeState('day');
         coder.className = 'title coder gpu-accelerate active';
