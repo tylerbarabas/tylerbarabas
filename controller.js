@@ -34,9 +34,9 @@ function(Avatar,Environment,World,ScreenCompatible, ModalDeveloper, ModalSongwri
         document.addEventListener('keydown', this.onKeyDown.bind(this), false);
         document.addEventListener('keyup', this.onKeyUp.bind(this), false);
         document.addEventListener('click',this.onClick.bind(this), false);
-            
+
         var frames = document.getElementsByClassName('frame');
-        
+
         for (i=0;i<frames.length;i++) {
           var f = frames[i];
           f.contentWindow.location.href = f.src;
@@ -49,11 +49,6 @@ function(Avatar,Environment,World,ScreenCompatible, ModalDeveloper, ModalSongwri
 
         switch (event.which) {
             case 32:
-                if (!this.environment.inTransition && this.currentStateIndex === 0)
-                    this.currentStateIndex = 1;
-                else if (!this.environment.inTransition)
-                    this.currentStateIndex = 0;
-
                 this.currentEnvironmentState = this.environmentStates[this.currentStateIndex];
                 this.environment.changeState(this.currentEnvironmentState);
                 break;

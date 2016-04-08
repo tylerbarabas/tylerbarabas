@@ -11,8 +11,6 @@ define([], function () {
 
         this.avatarContainer = null;
 
-        this.inTransition = false;
-
         this.init();
     }
 
@@ -41,10 +39,6 @@ define([], function () {
             this.cloud.className = state + " gpu-accelerate";
             this.ground.className = state + " gpu-accelerate";
             this.stars.className = state + " gpu-accelerate";
-
-            setTimeout(function() {
-                this.inTransition = false;
-            }.bind(this), 9000);
         }
     };
 
