@@ -17,7 +17,6 @@ define([], function () {
     Environment.prototype = {
 
         init: function() {
-
             this.sky = document.getElementById('sky');
             this.stars = document.getElementById('stars');
             this.moon = document.getElementById('moon');
@@ -26,12 +25,9 @@ define([], function () {
             this.ground = document.getElementById('ground');
 
             this.avatarContainer = document.getElementById('avatar-container');
-
-            this.changeState('day');
         },
 
         changeState: function (state) {
-
             this.inTransition = true;
             this.sky.className = state + " gpu-accelerate";
             this.moon.className = state + " gpu-accelerate";

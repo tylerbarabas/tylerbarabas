@@ -17,20 +17,20 @@
 			</div>
 
 			<div id="environment">
-				<div id="sky">
-					<div id="stars"></div>
-					<div id="moon">
+				<div id="sky" class="night">
+					<div id="stars" class="night"></div>
+					<div id="moon" class="night">
 						<div id="moon-2"></div>
 					</div>
-					<div id="sun"></div>
+					<div id="sun" class="night"></div>
 
-					<div id="cloud">
+					<div id="cloud" class="night">
 						<div id="cloud-1"></div>
 						<div id="cloud-2"></div>
 						<div id="cloud-3"></div>
 					</div>
 				</div>
-				<div id="ground">
+				<div id="ground" class="night">
 					<div id="road"></div>
 				</div>
 			</div>
@@ -147,6 +147,13 @@
 			<canvas id="avatar-container"></canvas>
 
 		</div>
+
+
+			<div id="loading">
+				<div id="loading-text">
+					<i class="fa fa-spinner fa-spin"></i> Loading...
+				</div>
+			</div>
 		<script src="/lib/CreateJS/createjs-2015.05.21.min.js"></script>
 		<script src="/lib/Require/require.js"></script>
 		<script src="controller.js"></script>

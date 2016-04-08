@@ -6,14 +6,23 @@ function(Avatar,Environment,World,ScreenCompatible, ModalDeveloper, ModalSongwri
         this.environment = Environment;
         this.currentStateIndex = 0;
         this.environmentStates = ['day','night'];
+        this.world = World;
+
         window.keysDown = [];
         ScreenCompatible.init();
     }
 
     Controller.prototype.init = function () {
-        this.world = World;
 
-        this.world.changeWorld('all');
+      this.loadingMask = document.getElementById('loading');
+      this.loadingMask.style.display = 'block';
+
+
+        window.onload = function(){
+          this.loadingMask.style.display = 'none';
+          this.world.changeWorld('all');
+          this.environment.changeState('day');
+        }.bind(this);
 
         this.modalDeveloper = ModalDeveloper;
         this.modalSongwriter = ModalSongwriter;
