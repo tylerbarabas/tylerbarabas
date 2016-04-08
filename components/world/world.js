@@ -23,20 +23,9 @@ define([], function () {
             this.worldsObjects.singerSongwriter.campfire = document.getElementById('campfire');
             this.worldsObjects.singerSongwriter.hut = document.getElementById('hut');
 
-
-            // this.avatarContainer.addEventListener('doneWalking',function(event){
-            //     if (event.side == 'left') {
-            //         this.changeWorld('coder');
-            //     } else if (event.side == 'right') {
-            //         this.changeWorld('singer-songwriter');
-            //     }
-            // }.bind(this));
-
         },
 
         changeWorld: function (world) {
-            // if (this.inTransition === true) return;
-
             var i = 0;
             if (world == 'all') {
                 for(i=0;i<this.worlds.length;i++) {
@@ -49,10 +38,6 @@ define([], function () {
                 }
                 this.worlds[world].className = 'world fadeIn';
             }
-
-            setTimeout(function() {
-                this.inTransition = false;
-            }.bind(this), 2000);
         }
     };
 

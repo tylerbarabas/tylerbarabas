@@ -35,12 +35,12 @@ define([], function () {
         changeState: function (state) {
 
             this.inTransition = true;
-            this.sky.className = state;
-            this.moon.className = state;
-            this.sun.className = state;
-            this.cloud.className = state;
-            this.ground.className = state;
-            this.stars.className = state;
+            this.sky.className = state + " gpu-accelerate";
+            this.moon.className = state + " gpu-accelerate";
+            this.sun.className = state + " gpu-accelerate";
+            this.cloud.className = state + " gpu-accelerate";
+            this.ground.className = state + " gpu-accelerate";
+            this.stars.className = state + " gpu-accelerate";
 
             setTimeout(function() {
                 this.inTransition = false;

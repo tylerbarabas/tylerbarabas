@@ -26,21 +26,21 @@ define(['lib/Ajax/ajax','components/world/world','components/environment/environ
 			Ajax.get('components/avatar/json/tyler.json', function(data){
         this.data = JSON.parse(data);
 				this.spritesheet = new createjs.SpriteSheet(this.data);
-        
+
 				this.stage = new createjs.Stage(this.domContainer);
-        
+
 				this.domContainer.height = this.data.frames.height;
 				this.domContainer.width = this.data.frames.width;
 				this.domContainer.style.bottom = '110px';
 				this.domContainer.style.left = this.parentContainer.offsetWidth/2 - (this.domContainer.offsetWidth / 2)+'px';
-        
+
 				this.currentPosition = {
 					bottom: parseInt(this.domContainer.style.bottom.split('p')[0]),
 					left: parseInt(this.domContainer.style.left.split('p')[0])*window.pageScale
 				};
-        
+
 				this.changeSprite('idle');
-      
+
 				createjs.Ticker.timingMode = createjs.Ticker.RAF;
 				createjs.Ticker.addEventListener("tick", this.stage);
 			}.bind(this));
@@ -197,23 +197,23 @@ define(['lib/Ajax/ajax','components/world/world','components/environment/environ
 				this.doAction('idle');
         World.changeWorld('coder');
         Environment.changeState('day');
-        coder.className = 'title coder active';
-        songwriter.className = 'title songwriter';
+        coder.className = 'title coder gpu-accelerate active';
+        songwriter.className = 'title songwriter gpu-accelerate';
         ModalDeveloper.open();
         ModalSongwriter.close();
 			} else if ((this.currentPosition.left/window.pageScale) > 650) {
 				this.doAction('guitar');
         World.changeWorld('singer-songwriter');
         Environment.changeState('night');
-        coder.className = 'title coder';
-        songwriter.className = 'title songwriter active';
+        coder.className = 'title coder gpu-accelerate';
+        songwriter.className = 'title songwriter gpu-accelerate active';
         ModalDeveloper.close();
         ModalSongwriter.open();
 			} else {
         this.doAction('idle');
         World.changeWorld('all');
-        coder.className = 'title coder';
-        songwriter.className = 'title songwriter';
+        coder.className = 'title coder gpu-accelerate';
+        songwriter.className = 'title songwriter gpu-accelerate';
         ModalDeveloper.close();
         ModalSongwriter.close();
       }
