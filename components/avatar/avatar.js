@@ -65,7 +65,9 @@ define(['lib/Ajax/ajax','components/world/world','components/environment/environ
 			switch(action) {
 				case 'walk-right':
 					this.domContainer.style.transform = "rotateY(0deg)";
-          this.domContainer.style.mozTransform = "rotateY(180deg)";
+          this.domContainer.style.mozTransform = "rotateY(0deg)";
+          this.domContainer.style.webkitTransform = "rotateY(0deg)";
+
 					this.changeSprite('walk');
 
 					if (this.currentPosition.left > window.innerWidth+10) {
@@ -89,6 +91,8 @@ define(['lib/Ajax/ajax','components/world/world','components/environment/environ
 				case 'walk-left':
 					this.domContainer.style.transform = "rotateY(180deg)";
           this.domContainer.style.mozTransform = "rotateY(180deg)";
+          this.domContainer.style.webkitTransform = "rotateY(180deg)";
+
 					this.changeSprite('walk');
 
 					if (this.currentPosition.left < -50) {
@@ -138,10 +142,11 @@ define(['lib/Ajax/ajax','components/world/world','components/environment/environ
 					if (this.currentPosition.left > newPosition.left) {
 						this.domContainer.style.transform = "rotateY(180deg)";
             this.domContainer.style.mozTransform = "rotateY(180deg)";
-
+            this.domContainer.style.webkitTransform = "rotateY(180deg)";
 					} else {
 						this.domContainer.style.transform = "rotateY(0deg)";
             this.domContainer.style.mozTransform = "rotateY(0deg)";
+            this.domContainer.style.webkitTransform = "rotateY(0deg)";
 					}
 					var ratePerSec = 500;
 					var distance = this.currentPosition.left - newPosition.left;
@@ -157,12 +162,14 @@ define(['lib/Ajax/ajax','components/world/world','components/environment/environ
 				case 'guitar':
 					this.domContainer.style.transform = "rotateY(0deg)";
           this.domContainer.style.mozTransform = "rotateY(0deg)";
+          this.domContainer.style.webkitTransform = "rotateY(0deg)";
 					this.changeSprite('guitar');
 					break;
 
         case 'work':
 					this.domContainer.style.transform = "rotateY(0deg)";
           this.domContainer.style.mozTransform = "rotateY(0deg)";
+          this.domContainer.style.webkitTransform = "rotateY(0deg)";
 					this.changeSprite('work');
 					break;
 
@@ -171,6 +178,7 @@ define(['lib/Ajax/ajax','components/world/world','components/environment/environ
 					this.walking = false;
 					this.domContainer.style.transform = "rotateY(0deg)";
           this.domContainer.style.mozTransform = "rotateY(0deg)";
+          this.domContainer.style.webkitTransform = "rotateY(0deg)";
 					this.changeSprite('idle');
 					break;
 			}
