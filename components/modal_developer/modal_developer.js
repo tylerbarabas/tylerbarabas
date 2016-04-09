@@ -7,10 +7,10 @@ define(['components/avatar/avatar'], function (Avatar) {
 
     ModalDeveloper.prototype = {
       open: function(){
-        this.dom.className = 'modal developer show';
+        this.dom.className = 'modal developer show gpu-accelerate';
       },
       close: function() {
-        this.dom.className = 'modal developer';
+        this.dom.className = 'modal developer gpu-accelerate';
       }
     };
 

@@ -7,10 +7,10 @@ define(['components/avatar/avatar'], function (Avatar) {
 
     ModalSongwriter.prototype = {
       open: function(){
-        this.dom.className = 'modal songwriter show';
+        this.dom.className = 'modal songwriter show gpu-accelerate';
       },
       close: function() {
-        this.dom.className = 'modal songwriter';
+        this.dom.className = 'modal songwriter gpu-accelerate';
       }
     };
 
