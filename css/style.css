@@ -583,6 +583,10 @@ a, a:hover, a:visited {
   width: 350px;
 }
 
+.modal.intro p {
+  margin-top: 0;
+}
+
 .modal.intro strong {
   font-size: 20px;
 }
