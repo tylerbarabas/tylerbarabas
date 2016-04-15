@@ -64,11 +64,8 @@ define(['lib/Ajax/ajax','components/world/world','components/environment/environ
 
 			switch(action) {
 				case 'walk-right':
-					this.domContainer.style.transform = "rotateY(0deg)";
-          this.domContainer.style.mozTransform = "rotateY(0deg)";
-          this.domContainer.style.webkitTransform = "rotateY(0deg)";
-
-					this.changeSprite('walk');
+        
+					this.changeSprite('walk-right');
 
 					if (this.currentPosition.left > window.innerWidth+10) {
 						this.currentPosition.left = -20;
@@ -89,11 +86,8 @@ define(['lib/Ajax/ajax','components/world/world','components/environment/environ
 					break;
 
 				case 'walk-left':
-					this.domContainer.style.transform = "rotateY(180deg)";
-          this.domContainer.style.mozTransform = "rotateY(180deg)";
-          this.domContainer.style.webkitTransform = "rotateY(180deg)";
 
-					this.changeSprite('walk');
+					this.changeSprite('walk-left');
 
 					if (this.currentPosition.left < -50) {
 						this.currentPosition.left = window.innerWidth + 10;
@@ -140,50 +134,31 @@ define(['lib/Ajax/ajax','components/world/world','components/environment/environ
 
 				case 'walk-to':
 					if (this.currentPosition.left > newPosition.left) {
-						this.domContainer.style.transform = "rotateY(180deg)";
-            this.domContainer.style.mozTransform = "rotateY(180deg)";
-            this.domContainer.style.webkitTransform = "rotateY(180deg)";
-            this.domContainer.style.msTransform = "rotateY(180deg)";
+            this.changeSprite('walk-left');
 					} else {
-						this.domContainer.style.transform = "rotateY(0deg)";
-            this.domContainer.style.mozTransform = "rotateY(0deg)";
-            this.domContainer.style.webkitTransform = "rotateY(0deg)";
-            this.domContainer.style.msTransform = "rotateY(0deg)";
+            this.changeSprite('walk-right');
 					}
 					var ratePerSec = 500;
 					var distance = this.currentPosition.left - newPosition.left;
 					distance = (distance<0)?distance*-1:distance;
 					var time = distance/(ratePerSec/1000);
 
-					this.changeSprite('walk');
 					this.moveTo(newPosition,time,function(){
 						this.doneWalking();
 					});
 					break;
 
 				case 'guitar':
-					this.domContainer.style.transform = "rotateY(0deg)";
-          this.domContainer.style.mozTransform = "rotateY(0deg)";
-          this.domContainer.style.webkitTransform = "rotateY(0deg)";
-          this.domContainer.style.msTransform = "rotateY(0deg)";
 					this.changeSprite('guitar');
 					break;
 
         case 'work':
-					this.domContainer.style.transform = "rotateY(0deg)";
-          this.domContainer.style.mozTransform = "rotateY(0deg)";
-          this.domContainer.style.webkitTransform = "rotateY(0deg)";
-          this.domContainer.style.msTransform = "rotateY(0deg)";
 					this.changeSprite('work');
 					break;
 
 				case 'idle':
 				default:
 					this.walking = false;
-					this.domContainer.style.transform = "rotateY(0deg)";
-          this.domContainer.style.mozTransform = "rotateY(0deg)";
-          this.domContainer.style.webkitTransform = "rotateY(0deg)";
-          this.domContainer.style.msTransform = "rotateY(0deg)";
 					this.changeSprite('idle');
 					break;
 			}

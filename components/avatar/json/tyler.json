@@ -16,10 +16,15 @@
 		  "frames": [15]
 		},
 
-		"walk": {
+		"walk-right": {
 			"next": true,
 			"speed": 0.2,
 			"frames": [6,7,8,7]
+		},
+    "walk-left": {
+			"next": true,
+			"speed": 0.2,
+			"frames": [17,10,16,10]
 		},
 	  "guitar": {
 		"next": true,
