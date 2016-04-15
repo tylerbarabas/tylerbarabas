@@ -143,10 +143,12 @@ define(['lib/Ajax/ajax','components/world/world','components/environment/environ
 						this.domContainer.style.transform = "rotateY(180deg)";
             this.domContainer.style.mozTransform = "rotateY(180deg)";
             this.domContainer.style.webkitTransform = "rotateY(180deg)";
+            this.domContainer.style.msTransform = "rotateY(180deg)";
 					} else {
 						this.domContainer.style.transform = "rotateY(0deg)";
             this.domContainer.style.mozTransform = "rotateY(0deg)";
             this.domContainer.style.webkitTransform = "rotateY(0deg)";
+            this.domContainer.style.msTransform = "rotateY(0deg)";
 					}
 					var ratePerSec = 500;
 					var distance = this.currentPosition.left - newPosition.left;
@@ -163,6 +165,7 @@ define(['lib/Ajax/ajax','components/world/world','components/environment/environ
 					this.domContainer.style.transform = "rotateY(0deg)";
           this.domContainer.style.mozTransform = "rotateY(0deg)";
           this.domContainer.style.webkitTransform = "rotateY(0deg)";
+          this.domContainer.style.msTransform = "rotateY(0deg)";
 					this.changeSprite('guitar');
 					break;
 
@@ -170,6 +173,7 @@ define(['lib/Ajax/ajax','components/world/world','components/environment/environ
 					this.domContainer.style.transform = "rotateY(0deg)";
           this.domContainer.style.mozTransform = "rotateY(0deg)";
           this.domContainer.style.webkitTransform = "rotateY(0deg)";
+          this.domContainer.style.msTransform = "rotateY(0deg)";
 					this.changeSprite('work');
 					break;
 
@@ -179,6 +183,7 @@ define(['lib/Ajax/ajax','components/world/world','components/environment/environ
 					this.domContainer.style.transform = "rotateY(0deg)";
           this.domContainer.style.mozTransform = "rotateY(0deg)";
           this.domContainer.style.webkitTransform = "rotateY(0deg)";
+          this.domContainer.style.msTransform = "rotateY(0deg)";
 					this.changeSprite('idle');
 					break;
 			}

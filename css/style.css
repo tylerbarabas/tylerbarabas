@@ -25,7 +25,7 @@ a, a:hover, a:visited {
 
 #environment {
 	position: absolute;
-	z-index: 1;
+	/*z-index: 1;*/
 
 	height: 100%;
 	width: 100%;
@@ -103,7 +103,7 @@ a, a:hover, a:visited {
 	position: absolute;
 	top: 0;
 	right: -100px;
-  z-index: 2;
+  /*z-index: 2;*/
 
 	width: 100px;
 	height: 100px;
@@ -387,12 +387,15 @@ a, a:hover, a:visited {
 
 #world-container {
 	position: absolute;
-	z-index: 1;
+	/*z-index: 1;*/
 	height: 100%;
 	width: 100%;
 }
 
 #world-container #singer-songwriter, #world-container #coder {
+  position: absolute;
+  top: 0;
+  left: 0;
 	height: 100%;
 	width: 100%;
 	opacity: 0;
@@ -433,7 +436,7 @@ a, a:hover, a:visited {
 
 #avatar-container {
 	position: absolute;
-	z-index: 2;
+	/*z-index: 2;*/
 	height: 100px;
 	width: 100px;
 }
@@ -446,7 +449,7 @@ a, a:hover, a:visited {
 	position: absolute;
 	top: -25%;
 	left: 57%;
-	z-index: 1;
+	/*z-index: 1;*/
 	transform: rotate(-158deg);
 	display: none;
 }
@@ -496,7 +499,7 @@ a, a:hover, a:visited {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1;
+  /*z-index: 1;*/
 
   height: 100%;
   width: 100%;
@@ -507,7 +510,7 @@ a, a:hover, a:visited {
 
 .modal {
   position: absolute;
-  z-index: 1;
+  /*z-index: 1;*/
   height: 480px;
   width: 560px;
   background-image: url(/img/paper/02-whitepaper.png);
@@ -587,29 +590,28 @@ a, a:hover, a:visited {
 }
 .title {
   position: absolute;;
-  z-index: 1;
+  /*z-index: 1;*/
   color: #ffffff;
   cursor: pointer;
   transition: all 500ms;
 }
 
 .title.songwriter {
-	bottom: 30px;
+	bottom: 0px;
 	right: 180px;
 	font-family: 'Pacifico', cursive;
   font-size: 35px;
 }
 
 .title.coder {
-	bottom: 40px;
-	left: 85px;
+	bottom: 25px;
+	left: 185px;
 	font-family: 'Orbitron', sans-serif;
   font-size: 30px;
 }
 
 .title.active {
-  transform: scale(1.3);
-  -moz-transform: scale(1.3);
+  font-size: 45px;
 }
 
 .video-text{
