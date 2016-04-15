@@ -2,6 +2,7 @@ html {
     overflow: hidden;
 }
 body {
+    font-family: Arnoldboecklin, fantasy;
     background-color: #000;
     transform-origin: 0 0;
 }
@@ -522,10 +523,74 @@ a, a:hover, a:visited {
   transition: all 3000ms;
 }
 
+.modal.intro {
+  top: -330px;
+  left: 300px;
+  visibility: hidden;
+  height: 160px;
+  width: 600px;
+  
+  -webkit-transform: rotate(720deg);
+  -moz-transform: rotate(720deg);
+  -ms-transform: rotate(720deg);
+  transform: rotate(720deg);
+}
+
+.modal.intro.show {
+  top: 200px;
+  left: 300px;
+  visibility: visible;
+  
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.modal.intro .intro-divider {
+  display: inline-block;
+  float: left;
+}
+
+.modal.intro .modal-title {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.modal.intro .intro-photo {
+    height: 135px;
+    width: 90px;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    margin: 15px;
+    -moz-box-shadow:    inset 0 0 10px #C1C5CA;
+    -webkit-box-shadow: inset 0 0 10px #C1C5CA;
+    box-shadow:         inset 0 0 10px #C1C5CA;
+    cursor: pointer;
+}
+
+.modal.intro .intro-photo.intro-resume-photo {
+  background-image: url(/img/resumepic.jpg);
+}
+
+.modal.intro .intro-photo.intro-songwriter-photo {
+  background-image: url(/img/tyler_songwriter.jpg);
+}
+
+.modal.intro .intro-text {
+  margin: 0 auto;
+  width: 350px;
+}
+
+.modal.intro strong {
+  font-size: 18px;
+}
+
 .modal.songwriter {
   top: 660px;
   left: 20px;
-  font-family: 'Pacifico', cursive;
+  font-family: 'Lobster Two', cursive;
 }
 
 .modal.songwriter .modal-scroll-wrapper {
@@ -560,7 +625,7 @@ a, a:hover, a:visited {
 
 .modal.show {
   top: 30px;
-  opacity: 0.9;
+  opacity: 1;
 }
 
 .float-left {
@@ -613,7 +678,7 @@ a, a:hover, a:visited {
 .title.songwriter {
 	bottom: 0px;
 	right: 180px;
-	font-family: 'Pacifico', cursive;
+	font-family: 'Lobster Two', cursive;
   font-size: 35px;
 }
 
@@ -701,5 +766,5 @@ a, a:hover, a:visited {
   position: absolute;
   top: 300px;
   left: 550px;
-  font-family: 'Pacifico', cursive;
+  font-family: 'Lobster Two', cursive;
 }

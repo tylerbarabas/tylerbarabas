@@ -1,5 +1,5 @@
-require(['components/avatar/avatar', 'components/environment/environment', 'components/world/world', 'lib/screen_compatible/screen_compatible', 'components/modal_developer/modal_developer', 'components/modal_songwriter/modal_songwriter'],
-function(Avatar,Environment,World,ScreenCompatible, ModalDeveloper, ModalSongwriter){
+require(['components/avatar/avatar', 'components/environment/environment', 'components/world/world', 'lib/screen_compatible/screen_compatible', 'components/modal_developer/modal_developer', 'components/modal_songwriter/modal_songwriter', 'components/modal_intro/modal_intro'],
+function(Avatar,Environment,World,ScreenCompatible, ModalDeveloper, ModalSongwriter, ModalIntro){
 
     function Controller () {
 
@@ -17,15 +17,13 @@ function(Avatar,Environment,World,ScreenCompatible, ModalDeveloper, ModalSongwri
       this.loadingMask = document.getElementById('loading');
       this.loadingMask.style.display = 'block';
 
-
         window.onload = function(){
           this.loadingMask.style.display = 'none';
           this.world.changeWorld('all');
           this.environment.changeState('day');
+          
+          ModalIntro.open();
         }.bind(this);
-
-        this.modalDeveloper = ModalDeveloper;
-        this.modalSongwriter = ModalSongwriter;
 
         var xIcons = document.getElementsByClassName('x-icon');
         this.xIcons = [];
@@ -37,6 +35,12 @@ function(Avatar,Environment,World,ScreenCompatible, ModalDeveloper, ModalSongwri
         this.titles = [];
         for (i=0;i<titles.length;i++){
           this.titles.push(titles[i]);
+        }
+        
+        var introPhotos = document.getElementsByClassName('intro-photo');
+        this.introPhotos = [];
+        for (i=0;i<introPhotos.length;i++) {
+          this.introPhotos.push(introPhotos[i]);
         }
 
         this.stage = document.getElementById('stage');
@@ -82,11 +86,11 @@ function(Avatar,Environment,World,ScreenCompatible, ModalDeveloper, ModalSongwri
     };
 
     Controller.prototype.onClick = function(event) {
-      if (event.target ===  document.getElementById('shadow') || this.titles.indexOf(event.target) !== -1) {
+      if (event.target ===  document.getElementById('shadow') || this.titles.indexOf(event.target) !== -1 || this.introPhotos.indexOf(event.target) !== -1) {
         Avatar.doAction('walk-to',{bottom: 110,left: event.clientX - ((window.innerWidth - (this.stage.clientWidth*window.pageScale))/2) - ((Avatar.domContainer.offsetWidth*window.pageScale)*0.6)});
       } else if (this.xIcons.indexOf(event.target) !== -1) {
-        this.modalDeveloper.close();
-        this.modalSongwriter.close();
+        ModalDeveloper.close();
+        ModalSongwriter.close();
         Avatar.doAction('walk-to',{bottom: 110,left: 550*window.pageScale});
       }
     };

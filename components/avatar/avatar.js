@@ -1,4 +1,4 @@
-define(['lib/Ajax/ajax','components/world/world','components/environment/environment', 'components/modal_developer/modal_developer', 'components/modal_songwriter/modal_songwriter'], function (Ajax,World,Environment,ModalDeveloper,ModalSongwriter) {
+define(['lib/Ajax/ajax','components/world/world','components/environment/environment', 'components/modal_developer/modal_developer', 'components/modal_songwriter/modal_songwriter', 'components/modal_intro/modal_intro'], function (Ajax,World,Environment,ModalDeveloper,ModalSongwriter, ModalIntro) {
     "use strict";
 
     function Avatar() {
@@ -195,6 +195,7 @@ define(['lib/Ajax/ajax','components/world/world','components/environment/environ
         songwriter.className = 'title songwriter gpu-accelerate';
         ModalDeveloper.open();
         ModalSongwriter.close();
+        ModalIntro.close();
 			} else if ((this.currentPosition.left/window.pageScale) > 650) {
 				this.doAction('guitar');
         World.changeWorld('singer-songwriter');
@@ -203,6 +204,7 @@ define(['lib/Ajax/ajax','components/world/world','components/environment/environ
         songwriter.className = 'title songwriter gpu-accelerate active';
         ModalDeveloper.close();
         ModalSongwriter.open();
+        ModalIntro.close();
 			} else {
         this.doAction('idle');
         World.changeWorld('all');
@@ -210,6 +212,7 @@ define(['lib/Ajax/ajax','components/world/world','components/environment/environ
         songwriter.className = 'title songwriter gpu-accelerate';
         ModalDeveloper.close();
         ModalSongwriter.close();
+        ModalIntro.open();
       }
 		}
 
