@@ -638,7 +638,7 @@ a, a:hover, a:visited {
 }
 .modal-divider {
   display: inline-block;
-  width: 542px;
+  width: 535px;
   margin-top: 10px;
   margin-left: 5px;
 }
@@ -694,7 +694,7 @@ a, a:hover, a:visited {
 }
 
 .video-text{
-  width: 300px;
+  width: 290px;
   margin-left: 12px;
   font-size: 14px;
   line-height: 22px;
