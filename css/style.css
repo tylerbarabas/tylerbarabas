@@ -1,5 +1,6 @@
 html {
     overflow: hidden;
+    width: auto;
 }
 body {
     font-family: Arnoldboecklin, fantasy;

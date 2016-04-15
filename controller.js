@@ -57,6 +57,7 @@ function(Avatar,Environment,World,ScreenCompatible, ModalDeveloper, ModalSongwri
     };
 
     Controller.prototype.onKeyDown = function (event) {
+        
         if (window.keysDown.indexOf(event.which) != -1) return;
         window.keysDown.push(event.which);
 
@@ -97,4 +98,12 @@ function(Avatar,Environment,World,ScreenCompatible, ModalDeveloper, ModalSongwri
 
     var controller = new Controller();
     controller.init();
+    
+    //prevent all scrolling
+    window.addEventListener("keydown", function(e) {
+      if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+          e.preventDefault();
+      }
+    }, false);
+    
 });
